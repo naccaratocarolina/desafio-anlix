@@ -8,7 +8,7 @@ const patients = JSON.parse(fs.readFileSync(pathToData, 'utf8'));
 
 const patientSeeder = async function () {
   try {
-    await Patient.sync({ force:true  });
+    await Patient.sync({ force:true });
 
     let lenght = Object.keys(patients).length;
     for (let i=0; i<lenght; i++) {
@@ -34,12 +34,11 @@ const patientSeeder = async function () {
         height: parseFloat(patients[i].altura.replace(",", ".")),
         weight: patients[i].peso,
         blood_type: patients[i].tipo_sanguineo,
-        color: patients[i].cor,
-        addressId: (i + 1)
+        color: patients[i].cor
       });
     }
 
-  } catch (err) { console.log(err);  }
+  } catch (err) { console.log(err); }
 }
 
 module.exports = patientSeeder;

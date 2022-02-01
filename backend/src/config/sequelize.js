@@ -21,6 +21,7 @@ module.exports = sequelize;
 
 // Models declaration
 require('../models/Patient');
+require('../models/Characteristic');
 
 for (mod in sequelize.models) {
   if (sequelize.models[mod].associate instanceof Function) {

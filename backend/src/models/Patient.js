@@ -117,4 +117,8 @@ const Patient = sequelize.define('Patient', {
   }
 });
 
+Patient.associate = function (models) {
+    Patient.hasMany(models.Characteristic, { as: "characteristics", foreignKey: "patientId", onDelete: "cascade" });
+}
+
 module.exports = Patient;

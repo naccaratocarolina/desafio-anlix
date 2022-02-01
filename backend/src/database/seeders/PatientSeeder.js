@@ -24,12 +24,18 @@ const patientSeeder = async function () {
         father: patients[i].pai,
         email: patients[i].email,
         password: patients[i].senha,
+        cep: patients[i].cep,
+        address: patients[i].endereco,
+        number: patients[i].numero,
+        city: patients[i].cidade,
+        state: patients[i].estado,
         landline: patients[i].telefone_fixo,
         phone_number: patients[i].celular,
         height: parseFloat(patients[i].altura.replace(",", ".")),
         weight: patients[i].peso,
         blood_type: patients[i].tipo_sanguineo,
-        color: patients[i].cor
+        color: patients[i].cor,
+        addressId: (i + 1)
       });
     }
 

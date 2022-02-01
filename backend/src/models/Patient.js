@@ -60,6 +60,31 @@ const Patient = sequelize.define('Patient', {
     allowNull: false
   },
 
+  cep: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+
+  address: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+
+  number: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+
+  city: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+
+  state: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+
   landline: {
     type: DataTypes.STRING,
     allowNull: false,

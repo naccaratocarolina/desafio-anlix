@@ -1,0 +1,95 @@
+const DataTypes = require("sequelize");
+const sequelize = require("../config/sequelize");
+
+const Patient = sequelize.define('Patient', {
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+
+  age: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+
+  cpf: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true
+  },
+
+  rg: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true
+  },
+
+  date_of_birth: {
+    type: DataTypes.DATEONLY,
+    allowNull: false
+  },
+
+  gender: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+
+  sign: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+
+  mother: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  
+  father: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true
+  },
+
+  password: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+
+  landline: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+
+  phone_number: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true
+  },
+
+  height: {
+    type: DataTypes.FLOAT,
+    allowNull: false
+  },
+
+  weight: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+
+  blood_type: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+
+  color: {
+    type: DataTypes.STRING,
+    allowNull: false
+  }
+});
+
+module.exports = Patient;

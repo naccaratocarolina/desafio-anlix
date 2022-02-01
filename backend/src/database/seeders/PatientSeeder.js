@@ -12,14 +12,12 @@ const patientSeeder = async function () {
 
     let lenght = Object.keys(patients).length;
     for (let i=0; i<lenght; i++) {
-      let date = new Date(patients[i].data_nasc.split('/').reverse().join('-') + ' 00:00:00');
-
       let patient = await Patient.create({
         name: patients[i].nome,
         age: patients[i].idade,
         cpf: patients[i].cpf,
         rg: patients[i].rg,
-        date_of_birth: date,
+        date_of_birth: new Date(patients[i].data_nasc.split('/').reverse().join('-') + ' 00:00:00'),
         gender: patients[i].sexo,
         sign: patients[i].signo,
         mother: patients[i].mae,

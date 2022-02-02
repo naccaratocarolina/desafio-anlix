@@ -1,5 +1,7 @@
 const Patient = require('../models/Patient');
+const Characteristic = require('../models/Characteristic');
 const sequelize = require("../config/sequelize");
+const { Op } = require("sequelize");
 
 const index = async (req, res) => {
     try {
@@ -11,6 +13,7 @@ const index = async (req, res) => {
 };
 
 const show = async (req, res) => {
+  console.log(req.params)
     const { id } = req.params;
     try {
         const patient = await Patient.findByPk(id, { include: ["characteristics"] });
@@ -61,10 +64,20 @@ const destroy = async (req, res) => {
     }
 };
 
+const name = async (req, res) => {
+  try {
+      const patients = await Patient.findAll({ where: { name: { [Op.like]: '%' + req.body.query + '%' } } });
+      return res.status(200).json({ patients });
+  } catch (err) {
+      return res.status(500).json({ err });
+  }
+};
+
 module.exports = {
     index,
     show,
     create,
     update,
     destroy,
+    name,
 }

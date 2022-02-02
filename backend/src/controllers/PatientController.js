@@ -1,0 +1,70 @@
+const Patient = require('../models/Patient');
+const sequelize = require("../config/sequelize");
+
+const index = async (req, res) => {
+    try {
+        const patients = await Patient.findAll( { include: ["characteristics"] } );
+        return res.status(200).json({ patients });
+    } catch (err) {
+        return res.status(500).json({ err });
+    }
+};
+
+const show = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const patient = await Patient.findByPk(id, { include: ["characteristics"] });
+        return res.status(200).json({ patient });
+    } catch (err) {
+        return res.status(500).json({ err });
+    }
+};
+
+const create = async (req, res) => {
+    try {
+        const patient = await Patient.create(req.body);
+        return res.status(201).json({ patient });
+    } catch (err) {
+        return res.status(500).json({ err });
+    }
+};
+
+const update = async (req, res) => {
+    const { id } = req.params;
+        try {
+            const [updated] = await Patient.update(req.body, { where: { id: id } });
+
+            if (updated) {
+                const patient = await Patient.findByPk(id);
+                console.log('UDPATED');
+                return res.status(200).send(patient);
+            }
+
+            throw new Error('Patiente não encontrado.');
+        } catch (err) {
+            return res.status(500).json({ err });
+        }
+};
+
+const destroy = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const deleted = await Patient.destroy({ where: { id: id } });
+
+        if (deleted) {
+            return res.status(200).json("Patiente deletado com sucesso.");
+        }
+
+        throw new Error ("Patiente não encontrado.");
+    } catch (err) {
+        return res.status(500).json({ err });
+    }
+};
+
+module.exports = {
+    index,
+    show,
+    create,
+    update,
+    destroy,
+}

@@ -26,6 +26,7 @@ for (let i=0; i<size; i++) {
     cep: patients[i].cep,
     address: patients[i].endereco,
     number: patients[i].numero,
+    neighborhood: patients[i].bairro,
     city: patients[i].cidade,
     state: patients[i].estado,
     landline: patients[i].telefone_fixo,

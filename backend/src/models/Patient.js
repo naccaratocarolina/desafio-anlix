@@ -43,7 +43,7 @@ const Patient = sequelize.define('Patient', {
     type: DataTypes.STRING,
     allowNull: false
   },
-  
+
   father: {
     type: DataTypes.STRING,
     allowNull: false
@@ -72,6 +72,11 @@ const Patient = sequelize.define('Patient', {
 
   number: {
     type: DataTypes.INTEGER,
+    allowNull: false
+  },
+
+  neighborhood: {
+    type: DataTypes.STRING,
     allowNull: false
   },
 

@@ -9,9 +9,15 @@ const router = Router();
 // Patient routes
 router.get('/patients', PatientController.index);
 router.get('/patients/:id', PatientController.show);
-router.get('/patients/names/list', PatientController.name);
+router.get('/patients/characteristics', PatientController.name);
 router.post('/patients', PatientController.create);
 router.put('/patients/:id', PatientController.update);
 router.delete('/patients/:id', PatientController.destroy);
+
+router.get('/characteristics/:id/patients', CharacteristicController.index);
+router.get('/characteristics/:type/patients/:id', CharacteristicController.show);
+router.get('/characteristics', CharacteristicController.dates);
+router.get('/dates/:id', CharacteristicController.rangeDate);
+router.get('/ind/:id/:type', CharacteristicController.rangeInd);
 
 module.exports = router;

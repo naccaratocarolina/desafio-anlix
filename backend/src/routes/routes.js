@@ -6,14 +6,15 @@ const CharacteristicController = require('../controllers/CharacteristicControlle
 
 const router = Router();
 
-// Patient routes
+// Rotas de Patient
 router.get('/patients', PatientController.index);
 router.get('/patients/:id', PatientController.show);
-router.get('/patients/characteristics', PatientController.name);
+router.get('/patients/characteristics/names', PatientController.name);
 router.post('/patients', PatientController.create);
 router.put('/patients/:id', PatientController.update);
 router.delete('/patients/:id', PatientController.destroy);
 
+// Rotas de Characteristic
 router.get('/characteristics/:id/patients', CharacteristicController.index);
 router.get('/characteristics/:type/patients/:id', CharacteristicController.show);
 router.get('/characteristics', CharacteristicController.dates);

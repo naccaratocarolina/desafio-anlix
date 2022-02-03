@@ -8,8 +8,8 @@ const { Op } = require("sequelize");
 const index = async (req, res) => {
   const { id } = req.params;
   try {
-      const ind_card = await Characteristic.findAll({ where: { patientId: id, type: "ind_card" }, order: [ ['epoch', 'DESC'] ] });
-      const ind_pulm = await Characteristic.findAll({ where: { patientId: id, type: "ind_pulm" }, order: [ ['epoch', 'DESC'] ] });
+      const ind_card = await Characteristic.findAll({ where: { patientId: id, type: "ind_card" }, order: [ ['epoch', 'DESC'] ], include: ["patient"] });
+      const ind_pulm = await Characteristic.findAll({ where: { patientId: id, type: "ind_pulm" }, order: [ ['epoch', 'DESC'] ], include: ["patient"] });
 
       return res.status(200).json({ ind_card, ind_pulm });
   } catch (err) {
@@ -24,7 +24,7 @@ const show = async (req, res) => {
   const type = (req.params.type == 1) ? "ind_card" : "ind_pulm";
 
   try {
-      const characteristic = await Characteristic.findOne({ where: { patientId: id, type: type }, order: [ ['epoch', 'DESC'] ] });
+      const characteristic = await Characteristic.findOne({ where: { patientId: id, type: type }, order: [ ['epoch', 'DESC'] ], include: ["patient"] });
 
       return res.status(200).json({ characteristic });
   } catch (err) {
@@ -40,7 +40,7 @@ const dates = async (req, res) => {
   const to = new Date(req.body.to + " 00:00:00");
 
   try {
-    const characteristics = await Characteristic.findAll({ where: { epoch: { [Op.between]: [from, to] } }, order: [ ['epoch', 'DESC'] ] });
+    const characteristics = await Characteristic.findAll({ where: { epoch: { [Op.between]: [from, to] } }, order: [ ['epoch', 'DESC'] ], include: ["patient"] });
 
     return res.status(200).json({ characteristics });
   } catch (err) {
@@ -56,7 +56,7 @@ const rangeDate = async (req, res)  => {
   const to = new Date(req.body.to + " 00:00:00");
 
   try {
-    const characteristics = await Characteristic.findAll({ where: { patientId: id, epoch: { [Op.between]: [from, to] } }, order: [ ['epoch', 'DESC'] ] });
+    const characteristics = await Characteristic.findOne({ where: { patientId: id, epoch: { [Op.between]: [from, to] } }, order: [ ['epoch', 'DESC'] ], include: ["patient"] });
 
     return res.status(200).json({ characteristics });
   } catch (err) {
@@ -74,7 +74,7 @@ const rangeInd = async (req, res) => {
 
   console.log(from);
   try {
-    const characteristic = await Characteristic.findOne({ where: { patientId: id, type: type, index: { [Op.between]: [from, to] } }, order: [ ['epoch', 'DESC'] ] })
+    const characteristic = await Characteristic.findOne({ where: { patientId: id, type: type, index: { [Op.between]: [from, to] } }, order: [ ['epoch', 'DESC'] ], include: ["patient"] })
     return res.status(200).json({ characteristic });
   } catch (err) {
     return res.status(500).json({ err });

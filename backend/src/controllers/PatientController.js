@@ -67,8 +67,9 @@ const destroy = async (req, res) => {
 // Consultar pacientes que contenham um nome ou parte
 // de um nome a ser especificado na chamada da API
 const name = async (req, res) => {
+  console.log(req.body.query)
   try {
-      const patients = await Patient.findAll({ where: { name: { [Op.like]: '%' + req.body.query + '%' } } });
+      const patients = await Patient.findAll({ where: { name: { [Op.like]: '%' + req.body.query + '%' } }, include: ["characteristics"] });
       return res.status(200).json({ patients });
   } catch (err) {
       return res.status(500).json({ err });

@@ -1,0 +1,163 @@
+/* General sttings */
+* {
+  list-style: none;
+  text-decoration: none;
+}
+
+/* Sidemenu */
+.sidemenu {
+    background: #FFFFFF;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 5vw;
+    height: 100%;
+    padding: 1rem;
+    transition: all 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidemenu #menu-items ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 25vh;
+  margin: 0;
+  padding: 0;
+}
+
+.sidemenu mat-icon {
+    color: #989FB8;
+    font-size: 1.8rem;
+}
+
+.sidemenu #exit-item {
+  margin-bottom: 2rem;
+}
+
+/* Header */
+.header {
+  background: #FFFFFF;
+  height: 6vh;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: row;
+  margin-left: 7.5vw;
+  position: relative;
+}
+
+.header #add-patient-button {
+  width: 12vw;
+}
+
+.header #add-patient-button button {
+  height: 100%;
+  width: 100%;
+  background: #138DFF;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: #FFFFFF;
+}
+
+.header #search-bar {
+  background: #EAEAEA;
+  margin-left: 1rem;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.header #search-bar mat-icon {
+  padding-left: 1.5rem;
+  color: #989FB8;
+  font-size: 1.8rem;
+}
+
+.header #search-bar form {
+  height: inherit;
+  width: inherit;
+}
+
+.header #search-bar input {
+  border: none;
+  height: inherit;
+  width: 90%;
+  background: inherit;
+  padding-left: 1.5rem;
+  font-size: 1rem;
+}
+
+/* Patient Container */
+.patient-container {
+  height: 85vh;
+  margin-left: 7.5vw;
+  position: relative;
+  text-transform: uppercase;
+}
+
+/* Patient Title */
+.patient-container #patient-title {
+  height: 6vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.patient-container #patient-title h1 {
+  color: #989FB8;
+  font-size: 1.8rem;
+  font-weight: normal
+}
+
+.patient-container #patient-title button {
+  background: transparent;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  color: #989FB8;
+}
+
+.patient-container #patient-title button mat-icon {
+  font-size: 1.8rem;
+}
+
+.patient-container #patient-title button:hover {
+  color: #138DFF;
+}
+
+/* Patient Table */
+.patient-container #patient-table {
+  background: #FFFFFF;
+  color: #989FB8;
+}
+
+.patient-container #patient-table #table-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 5vh;
+  margin-bottom: 1rem;
+}
+
+.patient-container #patient-table #table-header .table-heather-item {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}

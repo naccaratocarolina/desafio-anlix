@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Dashboard</title>
+  </head>
+  <body>
+
+    <!--Side menu-->
+    <div class="sidemenu">
+      <!--Logo-->
+
+      <!--Menu items-->
+      <div id="menu-items">
+        <ul>
+          <li>
+            <a href="/dashboard">
+              <span> <mat-icon aria-hidden="false" style="color: #138DFF;">home</mat-icon> </span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/dashboard">
+              <span> <mat-icon>star_border</mat-icon> </span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/dashboard">
+              <span> <mat-icon>bookmark_border</mat-icon> </span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/dashboard">
+              <span> <mat-icon> chat_bubble_outline</mat-icon> </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!--Exit-->
+      <div id="exit-item">
+        <a href="#">
+          <span> <mat-icon style="color: #EB5757;">exit_to_app</mat-icon> </span>
+        </a>
+      </div>
+    </div>
+
+    <!--Header-->
+    <div class="header">
+      <div id="add-patient-button">
+        <button type="button" name="button">Adicionar paciente</button>
+      </div>
+
+      <div id="search-bar">
+        <mat-icon>search</mat-icon>
+        <form>
+          <input type="text" placeholder="Pesquisar paciente..">
+        </form>
+      </div>
+    </div>
+
+    <!--Display de pacientes-->
+    <div class="patient-container">
+      <div id="patient-title">
+        <h1>Pacientes</h1>
+        <button type="button" name="button"><mat-icon>filter_list</mat-icon></button>
+      </div>
+
+      <div id="patient-table">
+        <div id="table-header">
+          <div class="table-heather-item">Id</div>
+          <div class="table-heather-item">Última atualização</div>
+          <div class="table-heather-item">Nome</div>
+          <div class="table-heather-item">Idade</div>
+          <div class="table-heather-item">Sexo</div>
+          <div class="table-heather-item">Configurações</div>
+        </div>
+      </div>
+
+    </div>
+
+  </body>
+</html>

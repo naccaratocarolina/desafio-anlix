@@ -30,7 +30,54 @@ const show = async (req, res) => {
   } catch (err) {
       return res.status(500).json({ err });
   }
+};
 
+const create = async (req, res) => {
+  const { id } = req.params;
+
+  const data = {
+    type: req.body.type,
+    epoch: req.body.epoch,
+    index: req.body.index,
+    patientId: id
+  };
+
+  try {
+    const characteristic = await Characteristic.create(data);
+    return res.status(201).json({ characteristic });
+  } catch (err) {
+      return res.status(500).json({ err });
+  }
+};
+
+const update = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const [updated] = await Characteristic.update(req.body, { where: { id: id } });
+
+    if (updated) {
+      const patient = await Characteristic.findByPk(id);
+      console.log('UDPATED');
+      return res.status(200).send(patient);
+    }
+
+    throw new Error('Característica não encontrada.');
+  } catch (err) {
+    return res.status(500).json({ err });
+  }
+};
+
+const destroy = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deleted = await Characteristic.destroy({ where: { id: id } });
+    if (deleted)
+      return res.status(200).json("Característica deletada com sucesso.");
+      
+      throw new Error ("Característica não encontrado.");
+    } catch (err) {
+      return res.status(500).json({ err });
+    }
 };
 
 // Consultar para uma determinada data (dia, mês e ano),
@@ -41,7 +88,6 @@ const dates = async (req, res) => {
 
   try {
     const characteristics = await Characteristic.findAll({ where: { epoch: { [Op.between]: [from, to] } }, order: [ ['epoch', 'DESC'] ], include: ["patient"] });
-
     return res.status(200).json({ characteristics });
   } catch (err) {
     return res.status(500).json({ err });
@@ -84,6 +130,7 @@ const rangeInd = async (req, res) => {
 module.exports = {
     index,
     show,
+    create,
     dates,
     rangeDate,
     rangeInd,

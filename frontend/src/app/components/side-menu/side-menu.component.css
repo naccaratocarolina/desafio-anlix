@@ -1,0 +1,39 @@
+/* General sttings */
+* {
+  list-style: none;
+  text-decoration: none;
+}
+
+/* Sidemenu */
+.sidemenu {
+    background: #FFFFFF;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 5vw;
+    height: 100%;
+    padding: 1rem;
+    transition: all 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidemenu #menu-items ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 25vh;
+  margin: 0;
+  padding: 0;
+}
+
+.sidemenu mat-icon {
+    color: #989FB8;
+    font-size: 1.8rem;
+}
+
+.sidemenu #exit-item {
+  margin-bottom: 2rem;
+}

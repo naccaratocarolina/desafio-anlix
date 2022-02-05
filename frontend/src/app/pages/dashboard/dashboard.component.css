@@ -4,40 +4,6 @@
   text-decoration: none;
 }
 
-/* Sidemenu */
-.sidemenu {
-    background: #FFFFFF;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 5vw;
-    height: 100%;
-    padding: 1rem;
-    transition: all 0.5s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.sidemenu #menu-items ul {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  height: 25vh;
-  margin: 0;
-  padding: 0;
-}
-
-.sidemenu mat-icon {
-    color: #989FB8;
-    font-size: 1.8rem;
-}
-
-.sidemenu #exit-item {
-  margin-bottom: 2rem;
-}
-
 /* Header */
 .header {
   background: #FFFFFF;
@@ -97,16 +63,12 @@
   font-size: 1rem;
 }
 
-/* Patient Container */
-.patient-container {
-  height: 85vh;
+/* Patients Table */
+.patients-table {
   margin-left: 7.5vw;
-  position: relative;
-  text-transform: uppercase;
 }
 
-/* Patient Title */
-.patient-container #patient-title {
+.patients-table #patient-title {
   height: 6vh;
   display: flex;
   flex-direction: row;
@@ -117,13 +79,13 @@
   margin-bottom: 1rem;
 }
 
-.patient-container #patient-title h1 {
+.patients-table #patient-title h1 {
   color: #989FB8;
   font-size: 1.8rem;
   font-weight: normal
 }
 
-.patient-container #patient-title button {
+.patients-table #patient-title button {
   background: transparent;
   border: none;
   text-align: center;
@@ -133,31 +95,41 @@
   color: #989FB8;
 }
 
-.patient-container #patient-title button mat-icon {
+.patients-table #patient-title button mat-icon {
   font-size: 1.8rem;
 }
 
-.patient-container #patient-title button:hover {
+.patients-table #patient-title button:hover {
   color: #138DFF;
 }
 
-/* Patient Table */
-.patient-container #patient-table {
+.patients-table table {
+  width: 100%;
+  color: #000000;
+  background: #FFFFFF;
+  table-layout: fixed;
+}
+
+.patients-table .mat-cell {
+  color: #989FB8;
+  font-size: 1rem;
+}
+
+.patients-table .mat-header-cell {
+  color: #989FB8;
+  font-size: 1rem;
+}
+
+.mat-paginator {
   background: #FFFFFF;
   color: #989FB8;
 }
 
-.patient-container #patient-table #table-header {
+.patients-table #settings {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
-  height: 5vh;
-  margin-bottom: 1rem;
+  justify-content: center;
 }
 
-.patient-container #patient-table #table-header .table-heather-item {
-  height: 100%;
-  display: flex;
-  align-items: center;
+.patients-table #settings mat-icon {
+  margin-right: 1rem;
 }

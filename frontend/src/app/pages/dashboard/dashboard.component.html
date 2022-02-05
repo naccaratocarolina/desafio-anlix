@@ -7,45 +7,7 @@
   <body>
 
     <!--Side menu-->
-    <div class="sidemenu">
-      <!--Logo-->
-
-      <!--Menu items-->
-      <div id="menu-items">
-        <ul>
-          <li>
-            <a href="/dashboard">
-              <span> <mat-icon aria-hidden="false" style="color: #138DFF;">home</mat-icon> </span>
-            </a>
-          </li>
-
-          <li>
-            <a href="/dashboard">
-              <span> <mat-icon>star_border</mat-icon> </span>
-            </a>
-          </li>
-
-          <li>
-            <a href="/dashboard">
-              <span> <mat-icon>bookmark_border</mat-icon> </span>
-            </a>
-          </li>
-
-          <li>
-            <a href="/dashboard">
-              <span> <mat-icon> chat_bubble_outline</mat-icon> </span>
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      <!--Exit-->
-      <div id="exit-item">
-        <a href="#">
-          <span> <mat-icon style="color: #EB5757;">exit_to_app</mat-icon> </span>
-        </a>
-      </div>
-    </div>
+    <app-side-menu></app-side-menu>
 
     <!--Header-->
     <div class="header">
@@ -62,24 +24,60 @@
     </div>
 
     <!--Display de pacientes-->
-    <div class="patient-container">
+    <div class="patients-table">
+      <!--Title-->
       <div id="patient-title">
         <h1>Pacientes</h1>
         <button type="button" name="button"><mat-icon>filter_list</mat-icon></button>
       </div>
 
-      <div id="patient-table">
-        <div id="table-header">
-          <div class="table-heather-item">Id</div>
-          <div class="table-heather-item">Última atualização</div>
-          <div class="table-heather-item">Nome</div>
-          <div class="table-heather-item">Idade</div>
-          <div class="table-heather-item">Sexo</div>
-          <div class="table-heather-item">Configurações</div>
-        </div>
-      </div>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+        <!-- Id Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> Id </th>
+          <td mat-cell *matCellDef="let patient"> {{ patient.id }} </td>
+        </ng-container>
 
-    </div>
+        <!-- Date of Birth Column -->
+        <ng-container matColumnDef="date_of_birth">
+          <th mat-header-cell *matHeaderCellDef> Nascimento </th>
+          <td mat-cell *matCellDef="let patient"> {{ patient.date_of_birth }} </td>
+        </ng-container>
 
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Nome </th>
+          <td mat-cell *matCellDef="let patient"> {{ patient.name }} </td>
+        </ng-container>
+
+        <!-- Age Column -->
+        <ng-container matColumnDef="age">
+          <th mat-header-cell *matHeaderCellDef> Idade </th>
+          <td mat-cell *matCellDef="let patient"> {{ patient.weight }} </td>
+        </ng-container>
+
+        <!-- Gender Column -->
+        <ng-container matColumnDef="gender">
+          <th mat-header-cell *matHeaderCellDef> Sexo </th>
+          <td mat-cell *matCellDef="let patient"> {{ patient.gender }} </td>
+        </ng-container>
+
+        <!-- Settings Column -->
+        <ng-container matColumnDef="settings">
+          <th mat-header-cell *matHeaderCellDef> Configurações </th>
+          <td mat-cell *matCellDef="let patient">
+            <div id="settings">
+              <mat-icon>edit</mat-icon>
+              <mat-icon style="color: #EB5757;">delete</mat-icon>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[12]"></mat-paginator>
+  </div>
   </body>
 </html>

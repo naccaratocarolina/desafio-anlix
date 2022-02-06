@@ -12,7 +12,7 @@
     <!--Header-->
     <div class="header">
       <div id="add-patient-button">
-        <button type="button" name="button">Adicionar paciente</button>
+        <button mat-raised-button type="button" name="button" class="mat-elevation-z0">Adicionar paciente</button>
       </div>
     </div>
 
@@ -23,6 +23,7 @@
         <h1>Pacientes</h1>
       </div>
 
+      <!--Actions-->
       <div class="patient-actions">
         <div class="patient-search">
           <mat-icon>search</mat-icon>
@@ -45,74 +46,77 @@
             </select>
           </mat-form-field>
         </div>
-      </div>
+        </div>
 
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
-        <!-- Checkbox Column -->
-        <ng-container matColumnDef="select">
-          <th mat-header-cell *matHeaderCellDef>
-            <mat-checkbox [color]="'accent'" (change)="$event ? masterToggle() : null"
-                            [checked]="selection.hasValue() && isAllSelected()"
-                            [indeterminate]="selection.hasValue() && !isAllSelected()">
-            </mat-checkbox>
-          </th>
+        <!--Table-->
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+          <!-- Checkbox Column -->
+          <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox [color]="'accent'" (change)="$event ? masterToggle() : null"
+                              [checked]="selection.hasValue() && isAllSelected()"
+                              [indeterminate]="selection.hasValue() && !isAllSelected()">
+              </mat-checkbox>
+            </th>
 
-          <td mat-cell *matCellDef="let patient">
-            <mat-checkbox (click)="$event.stopPropagation()"
-                          (change)="$event ? selection.toggle(patient) : null"
-                          [checked]="selection.isSelected(patient)">
-            </mat-checkbox>
-          </td>
-        </ng-container>
+            <td mat-cell *matCellDef="let patient">
+              <mat-checkbox (click)="$event.stopPropagation()"
+                            (change)="$event ? selection.toggle(patient) : null"
+                            [checked]="selection.isSelected(patient)">
+              </mat-checkbox>
+            </td>
+          </ng-container>
 
-        <!-- Id Column -->
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef> Id </th>
-          <td mat-cell *matCellDef="let patient"> {{ patient.id }} </td>
-        </ng-container>
+          <!-- Id Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Id </th>
+            <td mat-cell *matCellDef="let patient"> {{ patient.id }} </td>
+          </ng-container>
 
-        <!-- Date of Birth Column -->
-        <ng-container matColumnDef="date_of_birth">
-          <th mat-header-cell *matHeaderCellDef> Nascimento </th>
-          <td mat-cell *matCellDef="let patient"> {{ patient.date_of_birth }} </td>
-        </ng-container>
+          <!-- Date of Birth Column -->
+          <ng-container matColumnDef="date_of_birth">
+            <th mat-header-cell *matHeaderCellDef> Nascimento </th>
+            <td mat-cell *matCellDef="let patient"> {{ patient.date_of_birth }} </td>
+          </ng-container>
 
-        <!-- Name Column -->
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef> Nome </th>
-          <td mat-cell *matCellDef="let patient"> {{ patient.name }} </td>
-        </ng-container>
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Nome </th>
+            <td mat-cell *matCellDef="let patient"> {{ patient.name }} </td>
+          </ng-container>
 
-        <!-- Age Column -->
-        <ng-container matColumnDef="age">
-          <th mat-header-cell *matHeaderCellDef> Idade </th>
-          <td mat-cell *matCellDef="let patient"> {{ patient.age }} </td>
-        </ng-container>
+          <!-- Age Column -->
+          <ng-container matColumnDef="age">
+            <th mat-header-cell *matHeaderCellDef> Idade </th>
+            <td mat-cell *matCellDef="let patient"> {{ patient.age }} </td>
+          </ng-container>
 
-        <!-- Gender Column -->
-        <ng-container matColumnDef="gender">
-          <th mat-header-cell *matHeaderCellDef> Sexo </th>
-          <td mat-cell *matCellDef="let patient"> {{ patient.gender }} </td>
-        </ng-container>
+          <!-- Gender Column -->
+          <ng-container matColumnDef="gender">
+            <th mat-header-cell *matHeaderCellDef> Sexo </th>
+            <td mat-cell *matCellDef="let patient"> {{ patient.gender }} </td>
+          </ng-container>
 
-        <!-- Settings Column -->
-        <ng-container matColumnDef="settings">
-          <th mat-header-cell *matHeaderCellDef> Configurações </th>
-          <td mat-cell *matCellDef="let patient">
-            <div id="settings">
-              <mat-icon>edit</mat-icon>
-              <mat-icon style="color: #EB5757;">delete</mat-icon>
-            </div>
-          </td>
-        </ng-container>
+          <!-- Settings Column -->
+          <ng-container matColumnDef="settings">
+            <th mat-header-cell *matHeaderCellDef> Ações </th>
+            <td mat-cell *matCellDef="let patient">
+              <div id="actions">
+                <mat-icon>edit</mat-icon>
+                <mat-icon style="color: #EB5757;">delete</mat-icon>
+                <a [routerLink]="['/patient', patient.id]"><mat-icon>open_in_new</mat-icon></a>
+              </div>
+            </td>
+          </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-            (click)="selection.toggle(row)">
-        </tr>
-    </table>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+              (click)="selection.toggle(row)">
+          </tr>
+      </table>
 
-    <mat-paginator [pageSizeOptions]="[12]"></mat-paginator>
-  </div>
+      <mat-paginator [pageSizeOptions]="[12]" [showFirstLastButtons]="true"></mat-paginator>
+    </div>
+
   </body>
 </html>

@@ -6,9 +6,9 @@ const Characteristic = sequelize.define('Characteristic', {
     type: DataTypes.STRING,
     allowNull: false
   },
-  
+
   epoch: {
-    type: DataTypes.DATEONLY,
+    type: DataTypes.STRING,
     allowNull: false
   },
 

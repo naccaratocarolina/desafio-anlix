@@ -16,7 +16,7 @@ router.delete('/patients/:id', PatientController.destroy);
 
 // Rotas de Characteristic
 router.get('/characteristics/patients/:id', CharacteristicController.index);
-router.get('/characteristics/:type/patients/:id', CharacteristicController.show);
+router.get('/characteristics/patients/show/:id', CharacteristicController.show);
 router.get('/characteristics', CharacteristicController.dates);
 router.get('/dates/:id', CharacteristicController.rangeDate);
 router.get('/ind/:id/:type', CharacteristicController.rangeInd);

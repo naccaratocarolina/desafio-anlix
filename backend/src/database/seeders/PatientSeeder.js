@@ -59,7 +59,7 @@ fs.readdirSync(pathToDir).filter(function (dir) {
           if (dic[i].cpf === info[0]) {
             let characteristic = {
               type: data[0].replace(/\s+/g, ' ').trim().split(" ")[2],
-              epoch: new Date(info[1] * 1000),
+              epoch: info[1],
               index: info[2],
             };
 

@@ -41,15 +41,23 @@ export interface PatientData {
 export class PatientService {
   public patients: PatientData[] = [];
 
-  constructor( private http: HttpClient ) {
-  }
+  constructor( private http: HttpClient ) { }
 
-  getAllPatients(): Observable<PatientResponse> {
+  getAllPatients (): Observable<PatientResponse> {
     const baseUrl = environment.baseUrl;
     const headers = new HttpHeaders({
       "Content-Type": "application/json"
     });
 
     return this.http.get<PatientResponse>(`${baseUrl}/patients`, { headers });
+  }
+
+  getPatient (id: string): Observable<PatientResponse> {
+    const baseUrl = environment.baseUrl;
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json"
+    });
+
+    return this.http.get<PatientResponse>(`${baseUrl}/patients/${id}`, { headers });
   }
 }

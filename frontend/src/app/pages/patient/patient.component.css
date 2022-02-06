@@ -1,0 +1,231 @@
+/* General sttings */
+* {
+  list-style: none;
+  text-decoration: none;
+}
+
+/* Header */
+.header {
+  background: #FFFFFF;
+  height: 6vh;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: row;
+  margin-left: 7.5vw;
+  position: relative;
+}
+
+.header #add-characteristic-button {
+  width: 12vw;
+}
+
+.header #add-characteristic-button button {
+  height: 100%;
+  width: 100%;
+  background: #138DFF;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: #FFFFFF;
+}
+
+/* Page Container  */
+.page-container {
+  display: flex;
+  flex-direction: row;
+}
+
+/* Left Side*/
+.left-side {
+  width: 70vw;
+  margin-left: 7.5vw;
+  margin-right: 1rem;
+}
+
+.toggle-chart {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Chart */
+.characteristic-chart {
+  height: 40vh
+}
+
+.characteristic-chart .chart-container {
+  background-color: #FFFFFF;
+  height: 80%;
+}
+
+.mat-button-toggle {
+  background-color: #FFFFFF;
+  color: #000000;
+ }
+
+.mat-button-toggle-checked {
+    background-color: #138DFF;
+    color: #FFFFFF;
+}
+
+/* Title */
+.characteristics-table {
+  margin-bottom: 1rem;
+}
+
+.characteristics-table .characteristic-title {
+  height: 6vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  justify-content: space-between;
+}
+
+.characteristic-title h1 {
+  color: #989FB8;
+  font-size: 1.8rem;
+  font-weight: normal
+}
+
+/* Actions */
+.characteristic-actions {
+  background: #FFFFFF;
+  height: 6vh;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+/* Table */
+.characteristics-table table {
+  width: 100%;
+  color: #000000;
+  background: #FFFFFF;
+  table-layout: fixed;
+}
+
+.characteristics-table .mat-cell {
+  color: #989FB8;
+  font-size: 1rem;
+}
+
+.characteristics-table .mat-header-cell {
+  color: #989FB8;
+  font-size: 1rem;
+}
+
+.mat-paginator {
+  background: #FFFFFF;
+  color: #989FB8;
+}
+
+.characteristics-table #actions {
+  display: flex;
+  justify-content: center;
+}
+
+.characteristics-table #actions mat-icon {
+  margin-right: 1rem;
+}
+
+.characteristics-table #actions a {
+  color: inherit;
+}
+
+.mat-table {
+  overflow: auto;
+}
+
+.mat-column-select {
+  overflow: visible;
+  text-align: center;
+}
+
+/* Right Side */
+.right-side {
+  position: fixed;
+  margin-left: 80vw;
+  margin-right: 1rem;
+}
+
+#patient-info .mat-card-content {
+  font-size: 1rem;
+}
+
+.mat-card-header, .mat-card-content, .mat-card-subtitle {
+  background-color: #FFFFFF !important;
+  padding: #FFFFFF !important;
+  color: #989FB8;
+  width: 100%;
+}
+
+.mat-card-header {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.mat-card-title {
+  padding-top: 0.5rem;
+}
+
+.mat-card-subtitle {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.mat-card-subtitle mat-icon {
+  margin-right: 0.5rem;
+}
+
+ .mat-card {
+  background: #FFFFFF !important;
+  margin-bottom: 2rem;
+}
+
+.mat-card-content {
+  padding: #FFFFFF !important;
+  font-size: 1.2rem;
+}
+
+.mat-card-content .mat-expansion-panel {
+  background-color: #FFFFFF !important;
+  padding: #FFFFFF !important;
+  color: #989FB8 !important;
+}
+
+.mat-expansion-panel-header-title {
+  color: #989FB8 !important;
+  display: flex;
+  justify-content: space-between;
+}
+
+.patient-icon {
+  width: 3.5rem;
+  height: 3.5rem;
+  background-image: url('https://cdn0.iconfinder.com/data/icons/mobile-device/512/man-body-person-blue-round-512.png');
+  background-size: cover;
+}
+
+.heart-icon {
+  width: 3.5rem;
+  height: 3.5rem;
+  background-image: url('https://cdn1.iconfinder.com/data/icons/medical-specialties-1-3/380/Cardiology-512.png');
+  background-size: cover;
+}
+
+.lung-icon {
+  width: 3.5rem;
+  height: 3.5rem;
+  background-image: url('https://cdn1.iconfinder.com/data/icons/medical-specialties-1-3/380/Pulmonology-512.png');
+  background-size: cover;
+}

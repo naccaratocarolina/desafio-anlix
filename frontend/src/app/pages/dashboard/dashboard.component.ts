@@ -15,8 +15,10 @@ import { SelectionModel } from '@angular/cdk/collections';
 export class DashboardComponent implements OnInit {
   displayedColumns: string[] = ['select', 'id', 'date_of_birth', 'name', 'age', 'gender', 'settings'];
 
+  patient: any;
+
   dataSource: MatTableDataSource<any>;
-  selection = new SelectionModel<Element>(true, []);
+  selection = new SelectionModel<any>(true, []);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -26,7 +28,7 @@ export class DashboardComponent implements OnInit {
     this.getAllPatients();
   }
 
-  public getAllPatients() {
+  public getAllPatients () {
     this.patientService.getAllPatients().subscribe({
       next: (response) => {
         this.patientService.patients = response.patients;
@@ -35,8 +37,8 @@ export class DashboardComponent implements OnInit {
         this.dataSource = new MatTableDataSource(this.patientService.patients);
         this.dataSource.paginator = this.paginator;
       },
-      error: (error) => {
-        console.log(error);
+      error: (errorResponse) => {
+        console.log(errorResponse);
       }
     });
   }
@@ -54,5 +56,4 @@ export class DashboardComponent implements OnInit {
         this.selection.clear() :
         this.dataSource.data.forEach(row => this.selection.select(row));
   }
-
 }

@@ -15,8 +15,8 @@ const index = async (req, res) => {
 const show = async (req, res) => {
   const { id } = req.params;
   try {
-    const patient = await Patient.findByPk(id, { include: ["characteristics"] });
-    return res.status(200).json({ patient });
+    const patients = await Patient.findByPk(id, { include: ["characteristics"] });
+    return res.status(200).json({ patients });
   } catch (err) {
     return res.status(500).json({ err });
   }

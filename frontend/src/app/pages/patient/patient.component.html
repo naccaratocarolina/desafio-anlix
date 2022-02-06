@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Dashboard</title>
+  </head>
+  <body>
+
+    <!--Side menu-->
+    <app-side-menu></app-side-menu>
+
+    <!--Header-->
+    <div class="header">
+      <div id="add-characteristic-button">
+        <button mat-raised-button type="button" name="button" class="mat-elevation-z0">Adicionar caracteristica</button>
+      </div>
+    </div>
+
+    <!--Page container-->
+    <div class="page-container">
+      <!--Left Side-->
+      <div class="left-side">
+        <!--Chart-->
+        <div class="characteristic-chart">
+          <!--Title-->
+          <div class="characteristic-title toggle-chart">
+            <h1>Evolução</h1>
+
+            <!--Toggle Button-->
+            <mat-button-toggle-group [value]="selectedState" (change)="onChange($event)">
+              <mat-button-toggle [value]="typeEnum.ind_card">Cardíaco</mat-button-toggle>
+              <mat-button-toggle [value]="typeEnum.ind_pulm">Pulmonar</mat-button-toggle>
+            </mat-button-toggle-group>
+          </div>
+
+          <div class="chart-container">
+            <!--Ind_Card Chart-->
+            <div *ngIf="!selectedState">
+              <apx-chart
+                [series]="cardChartOptions.series"
+                [chart]="cardChartOptions.chart"
+                [xaxis]="cardChartOptions.xaxis"
+                [dataLabels]="cardChartOptions.dataLabels"
+                [grid]="cardChartOptions.grid"
+                [stroke]="cardChartOptions.stroke"
+                [title]="cardChartOptions.title">
+              </apx-chart>
+            </div>
+
+            <!--Ind_Pulm Chart-->
+            <div *ngIf="selectedState">
+              <apx-chart
+                [series]="pulmChartOptions.series"
+                [chart]="pulmChartOptions.chart"
+                [xaxis]="pulmChartOptions.xaxis"
+                [dataLabels]="pulmChartOptions.dataLabels"
+                [grid]="pulmChartOptions.grid"
+                [stroke]="pulmChartOptions.stroke"
+                [title]="pulmChartOptions.title">
+              </apx-chart>
+            </div>
+          </div>
+        </div>
+
+        <!--Characteristics table-->
+        <div class="characteristics-table">
+          <!--Title-->
+          <div class="characteristic-title">
+            <h1>Caracteristicas</h1>
+          </div>
+
+          <!--Actions-->
+          <div class="characteristic-actions">
+            <p>Ola</p>
+          </div>
+
+          <!--Table-->
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+            <!-- Checkbox Column -->
+            <ng-container matColumnDef="select">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox [color]="'accent'" (change)="$event ? masterToggle() : null"
+                                [checked]="selection.hasValue() && isAllSelected()"
+                                [indeterminate]="selection.hasValue() && !isAllSelected()">
+                </mat-checkbox>
+              </th>
+
+              <td mat-cell *matCellDef="let patient">
+                <mat-checkbox (click)="$event.stopPropagation()"
+                              (change)="$event ? selection.toggle(patient) : null"
+                              [checked]="selection.isSelected(patient)">
+                </mat-checkbox>
+              </td>
+            </ng-container>
+
+            <!-- Id Column -->
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef> Id </th>
+              <td mat-cell *matCellDef="let characteristic"> {{ characteristic.id }} </td>
+            </ng-container>
+
+            <!-- Type Column -->
+            <ng-container matColumnDef="type">
+              <th mat-header-cell *matHeaderCellDef> Índice </th>
+              <td mat-cell *matCellDef="let characteristic"> {{ characteristic.type }} </td>
+            </ng-container>
+
+            <!-- Date Column -->
+            <ng-container matColumnDef="epoch">
+              <th mat-header-cell *matHeaderCellDef> Data </th>
+              <td mat-cell *matCellDef="let characteristic"> {{ getDate(characteristic.epoch) }} </td>
+            </ng-container>
+
+            <!-- Time Column -->
+            <ng-container matColumnDef="time">
+              <th mat-header-cell *matHeaderCellDef> Horário </th>
+              <td mat-cell *matCellDef="let characteristic"> {{ getTime(characteristic.epoch) }} </td>
+            </ng-container>
+
+            <!-- Index Column -->
+            <ng-container matColumnDef="index">
+              <th mat-header-cell *matHeaderCellDef> Valor </th>
+              <td mat-cell *matCellDef="let characteristic"> {{ characteristic.index }} </td>
+            </ng-container>
+
+            <!-- Settings Column -->
+            <ng-container matColumnDef="settings">
+              <th mat-header-cell *matHeaderCellDef> Ações </th>
+              <td mat-cell *matCellDef="let patient">
+                <div id="actions">
+                  <mat-icon>edit</mat-icon>
+                  <mat-icon style="color: #EB5757;">delete</mat-icon>
+                </div>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                (click)="selection.toggle(row)"></tr>
+          </table>
+
+          <mat-paginator [pageSizeOptions]="[4, 12]" [showFirstLastButtons]="true"></mat-paginator>
+        </div>
+      </div>
+
+        <!--Right Side-->
+      <div class="right-side">
+        <!--Title-->
+        <div class="characteristic-title">
+          <h1>Dados</h1>
+        </div>
+
+        <!--Patient Info-->
+        <mat-card class="mat-elevation-z0" id="patient-info">
+          <mat-card-header>
+            <div mat-card-avatar class="patient-icon"></div>
+            <mat-card-title> {{ patient.name }} </mat-card-title>
+
+            <mat-card-subtitle> <mat-icon>cake</mat-icon> {{ patient.date_of_birth }} </mat-card-subtitle>
+          </mat-card-header>
+
+          <mat-card-content>
+            <ul>
+              <li>Idade: {{ patient.age }}</li>
+              <li>Sexo: {{ patient.gender }}</li>
+              <li>Cor: {{ patient.color }}</li>
+            </ul>
+
+            <mat-accordion>
+              <mat-expansion-panel hideToggle class="mat-elevation-z0">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Informações pessoais
+                    <button mat-icon-button>
+                      <mat-icon>more_vert</mat-icon>
+                    </button>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <ul>
+                  <li>Mae: {{ patient.mother }}</li>
+                  <li>Pai: {{ patient.father }}</li>
+                  <li>Telefone fixo: {{ patient.landline }}</li>
+                  <li>Telefone phone_number: {{ patient.phone_number }}</li>
+                  <li>Tipo Sanguineo: {{ patient.blood_type }}</li>
+                  <li>CPF: {{ patient.cpf }}</li>
+                  <li>RG: {{ patient.rg }}</li>
+                </ul>
+              </mat-expansion-panel>
+
+              <mat-expansion-panel hideToggle class="mat-elevation-z0">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Endereço
+                    <button mat-icon-button>
+                      <mat-icon>more_vert</mat-icon>
+                    </button>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <ul>
+                  <li>Endereço: {{ patient.address }}</li>
+                  <li>Numero: {{ patient.number }}</li>
+                  <li>Bairro: {{ patient.neighborhood }}</li>
+                  <li>Cidade: {{ patient.city }}</li>
+                  <li>Estado: {{ patient.state }}</li>
+                </ul>
+              </mat-expansion-panel>
+            </mat-accordion>
+
+          </mat-card-content>
+        </mat-card>
+
+
+        <!--Title-->
+        <div class="characteristic-title">
+          <h1>Últimos registros</h1>
+        </div>
+
+        <mat-card class="mat-elevation-z0" *ngFor="let characteristic of lastCharacteristics">
+          <mat-card-header>
+            <!--ind_card-->
+            <div mat-card-avatar *ngIf="characteristic.type === 'ind_card'" class="heart-icon"></div>
+            <mat-card-title *ngIf="characteristic.type === 'ind_card'"> Índice Cardíaco </mat-card-title>
+
+            <!--ind_pulm-->
+            <div mat-card-avatar *ngIf="characteristic.type === 'ind_pulm'" class="lung-icon"></div>
+            <mat-card-title *ngIf="characteristic.type === 'ind_pulm'"> Índice Pulmonar </mat-card-title>
+
+
+            <mat-card-subtitle> <mat-icon>calendar_today</mat-icon> {{ characteristic.epoch }} </mat-card-subtitle>
+          </mat-card-header>
+
+          <mat-card-content>
+            Índice: {{ characteristic.index }}
+          </mat-card-content>
+        </mat-card>
+
+        <!--Characteristic cards-->
+      </div>
+    </div>
+  </body>
+</html>

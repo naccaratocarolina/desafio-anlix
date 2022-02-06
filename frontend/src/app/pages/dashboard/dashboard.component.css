@@ -136,13 +136,17 @@
   color: #989FB8;
 }
 
-.patients-table #settings {
+.patients-table #actions {
   display: flex;
   justify-content: center;
 }
 
-.patients-table #settings mat-icon {
+.patients-table #actions mat-icon {
   margin-right: 1rem;
+}
+
+.patients-table #actions a {
+  color: inherit;
 }
 
 .mat-table {

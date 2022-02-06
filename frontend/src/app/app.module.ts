@@ -13,6 +13,7 @@ import { MaterialModule } from "./material.module";
 
 import { HttpClientModule } from '@angular/common/http';
 import { NgApexchartsModule } from "ng-apexcharts";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,9 @@ import { NgApexchartsModule } from "ng-apexcharts";
     SideMenuModule,
     HttpClientModule,
     MaterialModule,
-    NgApexchartsModule
+    NgApexchartsModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

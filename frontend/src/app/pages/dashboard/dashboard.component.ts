@@ -4,7 +4,11 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { SelectionModel } from '@angular/cdk/collections';
+import { FormControl } from '@angular/forms';
+
+export interface SearchItem {
+  name: string;
+}
 
 @Component({
   selector: 'app-dashboard',
@@ -18,7 +22,9 @@ export class DashboardComponent implements OnInit {
   patient: any;
 
   dataSource: MatTableDataSource<any>;
-  selection = new SelectionModel<any>(true, []);
+
+  nameFilter = new FormControl();
+  private filterValues = { name: '' }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -26,6 +32,30 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllPatients();
+
+    this.nameFilter.valueChanges
+      .subscribe(value => {
+        this.filterValues['name'] = value
+        this.dataSource.filter = JSON.stringify(this.filterValues)
+      });
+  }
+
+  public createFilter() {
+    let filterFunction = function (data: any, filter: string): boolean {
+      let searchTerms = JSON.parse(filter);
+      let nameSearch = () => {
+        let found = false;
+        for (let word in searchTerms.name.trim().toLowerCase().split(' ')) {
+          if (data.name.toLowerCase().indexOf(word) != -1) { found = true }
+        }
+        for (const word of searchTerms.name.trim().toLowerCase().split(' ')) {
+          if (data.name.toLowerCase().indexOf(word) != -1) { found = true }
+        }
+        return found
+      }
+      return nameSearch();
+    }
+    return filterFunction
   }
 
   public getAllPatients () {
@@ -36,6 +66,7 @@ export class DashboardComponent implements OnInit {
 
         this.dataSource = new MatTableDataSource(this.patientService.patients);
         this.dataSource.paginator = this.paginator;
+        this.dataSource.filterPredicate = this.createFilter();
       },
       error: (errorResponse) => {
         console.log(errorResponse);
@@ -43,17 +74,4 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  /** Whether the number of selected elements matches the total number of rows. */
-  isAllSelected () {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected === numRows;
-  }
-
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle () {
-    this.isAllSelected() ?
-        this.selection.clear() :
-        this.dataSource.data.forEach(row => this.selection.select(row));
-  }
 }

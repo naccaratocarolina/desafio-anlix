@@ -33,42 +33,13 @@
   color: #FFFFFF;
 }
 
-.header #search-bar {
-  background: #EAEAEA;
-  margin-left: 1rem;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.header #search-bar mat-icon {
-  padding-left: 1.5rem;
-  color: #989FB8;
-  font-size: 1.8rem;
-}
-
-.header #search-bar form {
-  height: inherit;
-  width: inherit;
-}
-
-.header #search-bar input {
-  border: none;
-  height: inherit;
-  width: 90%;
-  background: inherit;
-  padding-left: 1.5rem;
-  font-size: 1rem;
-}
-
 /* Patients Table */
 .patients-table {
   margin-left: 7.5vw;
 }
 
-.patients-table #patient-title {
+/* Title */
+.patients-table .patient-title {
   height: 6vh;
   display: flex;
   flex-direction: row;
@@ -79,30 +50,70 @@
   margin-bottom: 1rem;
 }
 
-.patients-table #patient-title h1 {
+.patients-table .patient-title h1 {
   color: #989FB8;
   font-size: 1.8rem;
   font-weight: normal
 }
 
-.patients-table #patient-title button {
-  background: transparent;
-  border: none;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  cursor: pointer;
+/* Search and Filter */
+.patient-actions {
+  background: #FFFFFF;
+  height: 6vh;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.patient-search {
+  width: 50vw;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.patient-search mat-icon {
+  color: #989FB8;
+  font-size: 1.8rem;
+  padding-left: 1.5rem;
+  padding-right: 1rem;
+}
+
+.patient-search .mat-form-field {
+  font-size: 1rem;
+  width: 100%;
+  height: 100%;
+}
+
+.patient-search .mat-form-field .mat-input-element {
+  color: #989FB8;
+  padding-left: 1.5rem;
+  font-size: 1rem;
+  width: 100%;
+  height: 2vh;
+}
+
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-label {
+  font-size: 1rem;
   color: #989FB8;
 }
 
-.patients-table #patient-title button mat-icon {
-  font-size: 1.8rem;
+.patient-filter {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 2rem;
 }
 
-.patients-table #patient-title button:hover {
-  color: #138DFF;
+.patient-filter mat-icon {
+  color: #989FB8;
+  font-size: 1.3rem;
 }
 
+/* Table */
 .patients-table table {
   width: 100%;
   color: #000000;
@@ -132,4 +143,13 @@
 
 .patients-table #settings mat-icon {
   margin-right: 1rem;
+}
+
+.mat-table {
+  overflow: auto;
+}
+
+.mat-column-select {
+  overflow: visible;
+  text-align: center;
 }

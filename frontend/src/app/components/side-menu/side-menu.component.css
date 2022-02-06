@@ -37,3 +37,7 @@
 .sidemenu #exit-item {
   margin-bottom: 2rem;
 }
+
+::ng-deep .mat-checkbox .mat-checkbox-frame {
+  border-color: #989FB8;
+}

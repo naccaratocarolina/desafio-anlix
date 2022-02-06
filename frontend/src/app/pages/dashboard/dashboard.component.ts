@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,9 +13,10 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 
 export class DashboardComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'date_of_birth', 'name', 'age', 'gender', 'settings'];
+  displayedColumns: string[] = ['select', 'id', 'date_of_birth', 'name', 'age', 'gender', 'settings'];
 
   dataSource: MatTableDataSource<any>;
+  selection = new SelectionModel<Element>(true, []);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -37,6 +39,20 @@ export class DashboardComponent implements OnInit {
         console.log(error);
       }
     });
+  }
+
+  /** Whether the number of selected elements matches the total number of rows. */
+  isAllSelected () {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle () {
+    this.isAllSelected() ?
+        this.selection.clear() :
+        this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
 }

@@ -11,8 +11,8 @@
 
     <!--Header-->
     <div class="header">
-      <div id="add-characteristic-button">
-        <button mat-raised-button type="button" name="button" class="mat-elevation-z0">Adicionar caracteristica</button>
+      <div class="page-button">
+        <button mat-raised-button class="mat-elevation-z0">Adicionar caracteristica</button>
       </div>
     </div>
 
@@ -70,29 +70,14 @@
           </div>
 
           <!--Actions-->
-          <div class="characteristic-actions">
-            <p>Ola</p>
+          <div class="characteristic-actions page-button">
+            <div class="page-button">
+              <button mat-raised-button class="mat-elevation-z0" (click)="exporter.exportTable('csv')">Exportar CSV</button>
+            </div>
           </div>
 
           <!--Table-->
-          <table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
-            <!-- Checkbox Column -->
-            <ng-container matColumnDef="select">
-              <th mat-header-cell *matHeaderCellDef>
-                <mat-checkbox [color]="'accent'" (change)="$event ? masterToggle() : null"
-                                [checked]="selection.hasValue() && isAllSelected()"
-                                [indeterminate]="selection.hasValue() && !isAllSelected()">
-                </mat-checkbox>
-              </th>
-
-              <td mat-cell *matCellDef="let patient">
-                <mat-checkbox (click)="$event.stopPropagation()"
-                              (change)="$event ? selection.toggle(patient) : null"
-                              [checked]="selection.isSelected(patient)">
-                </mat-checkbox>
-              </td>
-            </ng-container>
-
+          <table mat-table matTableExporter [dataSource]="dataSource" class="mat-elevation-z0" #exporter="matTableExporter" [hiddenColumns]="[0, 7]">
             <!-- Id Column -->
             <ng-container matColumnDef="id">
               <th mat-header-cell *matHeaderCellDef> Id </th>
@@ -228,7 +213,8 @@
             <mat-card-title *ngIf="characteristic.type === 'ind_pulm'"> Índice Pulmonar </mat-card-title>
 
 
-            <mat-card-subtitle> <mat-icon>calendar_today</mat-icon> {{ characteristic.epoch }} </mat-card-subtitle>
+            <mat-card-subtitle> <mat-icon>calendar_today</mat-icon> {{ getDate(characteristic.epoch) }}</mat-card-subtitle>
+            <mat-card-subtitle> <mat-icon>access_time</mat-icon> {{ getTime(characteristic.epoch) }} </mat-card-subtitle>
           </mat-card-header>
 
           <mat-card-content>

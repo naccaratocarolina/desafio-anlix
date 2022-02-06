@@ -13,7 +13,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 })
 
 export class DashboardComponent implements OnInit {
-  displayedColumns: string[] = ['select', 'id', 'date_of_birth', 'name', 'age', 'gender', 'settings'];
+  displayedColumns: string[] = ['id', 'date_of_birth', 'name', 'age', 'gender', 'settings'];
 
   patient: any;
 

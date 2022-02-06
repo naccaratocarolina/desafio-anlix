@@ -39,6 +39,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { MatTableExporterModule } from 'mat-table-exporter';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -84,6 +85,7 @@ import { MatTreeModule } from '@angular/material/tree';
     MatSnackBarModule,
     MatSortModule,
     MatTableModule,
+    MatTableExporterModule,
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
@@ -129,6 +131,7 @@ import { MatTreeModule } from '@angular/material/tree';
     MatSnackBarModule,
     MatSortModule,
     MatTableModule,
+    MatTableExporterModule,
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,

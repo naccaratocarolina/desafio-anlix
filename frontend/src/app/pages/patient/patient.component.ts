@@ -38,7 +38,7 @@ export type ChartOptions = {
   styleUrls: ['./patient.component.css']
 })
 export class PatientComponent implements OnInit {
-  displayedColumns: string[] = ['select', 'id', 'type', 'epoch', 'time', 'index', 'settings'];
+  displayedColumns: string[] = ['id', 'type', 'epoch', 'time', 'index', 'settings'];
 
   id: any;
 
@@ -76,11 +76,10 @@ export class PatientComponent implements OnInit {
       var pulm_data = JSON.parse(localStorage.getItem("ind_pulm") as string);
 
       this.cardChartOptions = {
-        series: [ { name: "Indice Cardíaco", data: card_data } ],
+        series: [ { name: "Índice Cardíaco", data: card_data } ],
         chart: { height: 300, type: "scatter", zoom: { type: "xy" } },
         dataLabels: { enabled: false },
         stroke: { curve: "stepline" },
-        title: { text: "Indice Cardíaco", align: "left" },
         grid: { xaxis: { lines: { show: true } },
                 yaxis: { lines: { show: true } },
                 row: { colors: ["#f3f3f3", "transparent"], opacity: 0.5 }
@@ -89,11 +88,10 @@ export class PatientComponent implements OnInit {
       };
 
       this.pulmChartOptions = {
-        series: [ { name: "Indice Pulmonar", data: pulm_data } ],
+        series: [ { name: "Índice Pulmonar", data: pulm_data } ],
         chart: { height: 300, type: "scatter", zoom: { type: "xy" } },
         dataLabels: { enabled: true },
         stroke: { curve: "straight" },
-        title: { text: "Indice Pulmonar", align: "left" },
         grid: { xaxis: { lines: { show: true } },
                 yaxis: { lines: { show: true } },
                 row: { colors: ["#f3f3f3", "transparent"], opacity: 0.5 }
@@ -179,7 +177,7 @@ export class PatientComponent implements OnInit {
       next: (response) => {
         this.ind_card = response.ind_card;
         this.ind_pulm = response.ind_pulm;
-        
+
         this.generateChartData();
 
         this.characteristics = this.ind_card.concat(this.ind_pulm);

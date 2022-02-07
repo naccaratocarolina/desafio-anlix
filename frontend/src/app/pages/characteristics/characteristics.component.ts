@@ -84,6 +84,10 @@ export class CharacteristicsComponent implements OnInit {
     return hours + ':' + minutes + ':' + seconds;
   }
 
+  public formatType (type: string) {
+    return type === "ind_card"? "Índice Cardíaco" : "Índice Pulmonar";
+  }
+
   public applyFilter () {
     this.dataSource.filter = '' + Math.random();
   }

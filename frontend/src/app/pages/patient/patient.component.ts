@@ -158,6 +158,10 @@ export class PatientComponent implements OnInit {
     return day + '/' + month + '/' + year;
   }
 
+  public formatType (type: string) {
+    return type === "ind_card"? "Índice Cardíaco" : "Índice Pulmonar";
+  }
+
   public getPatient (id: string) {
     this.patientService.getPatient(id).subscribe({
       next: (response) => {

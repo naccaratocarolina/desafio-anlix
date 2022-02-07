@@ -84,7 +84,7 @@
         <!-- Type Column -->
         <ng-container matColumnDef="type">
           <th mat-header-cell *matHeaderCellDef> Índice </th>
-          <td mat-cell *matCellDef="let characteristic"> {{ characteristic.type }} </td>
+          <td mat-cell *matCellDef="let characteristic"> {{ formatType(characteristic.type) }} </td>
         </ng-container>
 
         <!-- Date Column -->

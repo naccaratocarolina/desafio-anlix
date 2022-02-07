@@ -3,9 +3,18 @@ const Characteristic = require('../models/Characteristic');
 const sequelize = require("../config/sequelize");
 const { Op } = require("sequelize");
 
+const index = async (req, res) => {
+  try {
+    const characteristics = await Characteristic.findAll();
+    return res.status(200).json({ characteristics });
+  } catch (err) {
+    return res.status(500).json({ err });
+  }
+};
+
 // Consultar em uma única chamada, todas as características de um paciente,
 // com os valores mais recentes de cada uma;
-const index = async (req, res) => {
+const indexPatientCharacteristic = async (req, res) => {
   const { id } = req.params;
   try {
       const ind_card = await Characteristic.findAll({ where: { patientId: id, type: "ind_card" }, order: [ ['epoch', 'DESC'] ], include: ["patient"] });
@@ -129,6 +138,7 @@ const rangeInd = async (req, res) => {
 
 module.exports = {
     index,
+    indexPatientCharacteristic,
     show,
     create,
     update,

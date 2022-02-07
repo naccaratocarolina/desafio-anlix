@@ -27,3 +27,140 @@
   cursor: pointer;
   color: #FFFFFF;
 }
+
+/* Table */
+.characteristics-table {
+  margin-left: 8vw;
+}
+
+/* Title */
+.characteristics-table .patient-title {
+  height: 6vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.characteristics-table .patient-title h1 {
+  color: #989FB8;
+  font-size: 1.8rem;
+  font-weight: normal
+}
+
+/* Actions */
+.characteristics-actions .page-button {
+  position: absolute;
+  right: 3.5rem;
+}
+
+.characteristics-actions .mat-expansion-panel {
+  background-color: #FFFFFF !important;
+  padding: #FFFFFF !important;
+  color: #989FB8 !important;
+}
+
+.characteristics-actions .mat-expansion-panel-header-title, mat-label {
+  color: #989FB8 !important;
+}
+
+::ng-deep .mat-expansion-indicator:after {
+  color: #989FB8;
+}
+
+.characteristics-actions mat-icon {
+  margin-right: 0.5rem;
+}
+
+.characteristics-actions .form-title h2 {
+  font-size: 1rem;
+}
+
+.characteristics-actions h4 {
+  margin: 0;
+}
+
+.characteristics-actions .date-filter-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 0;
+}
+
+.characteristics-actions .date-filter {
+  margin-right: 1rem;
+}
+
+.characteristics-actions button {
+  height: 50%;
+  background: #138DFF;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: #FFFFFF;
+  margin-right: 1rem;
+}
+
+::ng-deep .mat-icon-button, .mat-stroked-button {
+  color: #989FB8;
+}
+
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-label {
+  font-size: 1rem;
+  color: #989FB8;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #989FB8 !important;
+}
+
+/* Table */
+.characteristics-table table {
+  width: 100%;
+  color: #000000;
+  background: #FFFFFF;
+  table-layout: fixed;
+}
+
+.characteristics-table .mat-cell {
+  color: #989FB8;
+  font-size: 1rem;
+}
+
+.characteristics-table .mat-header-cell {
+  color: #989FB8;
+  font-size: 1rem;
+}
+
+.mat-paginator {
+  background: #FFFFFF;
+  color: #989FB8;
+}
+
+.characteristics-table #actions {
+  display: flex;
+  justify-content: center;
+}
+
+.characteristics-table #actions mat-icon {
+  margin-right: 1rem;
+}
+
+.characteristics-table #actions a {
+  color: inherit;
+}
+
+.mat-table {
+  overflow: auto;
+}
+
+.mat-column-select {
+  overflow: visible;
+  text-align: center;
+}

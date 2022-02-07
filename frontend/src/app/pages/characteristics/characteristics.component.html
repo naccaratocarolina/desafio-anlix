@@ -15,5 +15,112 @@
         <button mat-raised-button class="mat-elevation-z0">Adicionar caracteristica</button>
       </div>
     </div>
+
+    <!--Table-->
+    <div class="characteristics-table">
+      <!--Title-->
+      <div class="patient-title">
+        <h1>Características</h1>
+      </div>
+
+      <!--Actions-->
+      <div class="characteristics-actions">
+        <mat-accordion>
+          <mat-expansion-panel class="mat-elevation-z0">
+            <mat-expansion-panel-header>
+              <!--Accordion Title-->
+              <mat-panel-title>
+                <mat-icon>filter_list</mat-icon>
+                Filtrar Características
+              </mat-panel-title>
+              <mat-panel-description>
+
+                <div class="page-button">
+                  <button mat-button class="mat-elevation-z0" (click)="exporter.exportTable('csv')">
+                    <mat-icon>get_app</mat-icon>
+                    Exportar CSV
+                  </button>
+                </div>
+
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <!--Date Filter-->
+            <form [formGroup]="dataFilterForm">
+              <div class="form-title">
+                <h2>Características filtradas por</h2>
+              </div>
+
+              <!--Date Filter-->
+              <h4>Data:</h4>
+              <div class="date-filter-container">
+                <div class="date-filter">
+                  <mat-form-field>
+                    <input matInput
+                      [matDatepicker]="fromDate"
+                      placeholder="Escolha uma data"
+                      formControlName="fromDate">
+                    <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+                    <mat-datepicker #fromDate></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                 <button mat-button class="mat-elevation-z0" (click)="applyFilter()">Filtrar</button>
+                 <button mat-button class="mat-elevation-z0" (click)="resetFilters()">Limpar</button>
+              </div>
+            </form>
+
+
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+
+      <table mat-table matTableExporter [dataSource]="dataSource" class="mat-elevation-z0" #exporter="matTableExporter" [hiddenColumns]="[0, 7]">
+        <!-- Id Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> Id </th>
+          <td mat-cell *matCellDef="let characteristic"> {{ characteristic.id }} </td>
+        </ng-container>
+
+        <!-- Type Column -->
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef> Índice </th>
+          <td mat-cell *matCellDef="let characteristic"> {{ characteristic.type }} </td>
+        </ng-container>
+
+        <!-- Date Column -->
+        <ng-container matColumnDef="epoch">
+          <th mat-header-cell *matHeaderCellDef> Data </th>
+          <td mat-cell *matCellDef="let characteristic"> {{ getDate(characteristic.epoch) }} </td>
+        </ng-container>
+
+        <!-- Time Column -->
+        <ng-container matColumnDef="time">
+          <th mat-header-cell *matHeaderCellDef> Horário </th>
+          <td mat-cell *matCellDef="let characteristic"> {{ getTime(characteristic.epoch) }} </td>
+        </ng-container>
+
+        <!-- Index Column -->
+        <ng-container matColumnDef="index">
+          <th mat-header-cell *matHeaderCellDef> Valor </th>
+          <td mat-cell *matCellDef="let characteristic"> {{ characteristic.index }} </td>
+        </ng-container>
+
+        <!-- Settings Column -->
+        <ng-container matColumnDef="settings">
+          <th mat-header-cell *matHeaderCellDef> Ações </th>
+          <td mat-cell *matCellDef="let patient">
+            <div id="actions">
+              <mat-icon>edit</mat-icon>
+              <mat-icon style="color: #EB5757;">delete</mat-icon>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[12]" [showFirstLastButtons]="true"></mat-paginator>
+    </div>
+
   </body>
 </html>

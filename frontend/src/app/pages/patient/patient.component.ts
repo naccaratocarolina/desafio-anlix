@@ -132,7 +132,7 @@ export class PatientComponent implements OnInit {
 
     const day = date.getDate() < 9 ? '0' + date.getDate() : date.getDate();
     const month = (date.getMonth() + 1) < 9 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
-    const year = date.getFullYear();;
+    const year = date.getFullYear();
 
     return day + '/' + month + '/' + year;
   }
@@ -153,7 +153,7 @@ export class PatientComponent implements OnInit {
 
     const day = (date.getDate() + 1) < 9 ? '0' + date.getDate() : (date.getDate() + 1);
     const month = (date.getMonth() + 1) < 9 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
-    const year = date.getFullYear();;
+    const year = date.getFullYear();
 
     return day + '/' + month + '/' + year;
   }

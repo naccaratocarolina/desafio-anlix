@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { PatientComponent } from './pages/patient/patient.component';
+import { CharacteristicsComponent } from './pages/characteristics/characteristics.component';
 
 import { SideMenuModule } from "./components/side-menu/side-menu.module";
 import { MaterialModule } from "./material.module";
@@ -14,7 +15,6 @@ import { MaterialModule } from "./material.module";
 import { HttpClientModule } from '@angular/common/http';
 import { NgApexchartsModule } from "ng-apexcharts";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CharacteristicsComponent } from './pages/characteristics/characteristics.component';
 
 @NgModule({
   declarations: [

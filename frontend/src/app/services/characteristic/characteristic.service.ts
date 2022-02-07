@@ -22,7 +22,7 @@ export interface CharacteristicData {
   providedIn: 'root'
 })
 export class CharacteristicService {
-  public characteristics: CharacteristicResponse[] = [];
+  public characteristics: CharacteristicData[] = [];
 
   constructor( private http: HttpClient ) { }
 

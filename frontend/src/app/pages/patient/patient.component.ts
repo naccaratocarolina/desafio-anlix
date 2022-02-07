@@ -217,6 +217,10 @@ export class PatientComponent implements OnInit {
     this.dataSource.filter = '' + Math.random();
   }
 
+  public resetFilters () {
+    this.dataSource.filter = '';
+  }
+
   public getPacientCharacteristic (id: string) {
     this.characteristicService.getPacientCharacteristic(id).subscribe({
       next: (response) => {

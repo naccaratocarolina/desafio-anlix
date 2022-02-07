@@ -1,0 +1,29 @@
+* {
+  list-style: none;
+  text-decoration: none;
+}
+
+/* Header */
+.header {
+  background: #FFFFFF;
+  height: 6vh;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: row;
+  margin-left: 8vw;
+  position: relative;
+}
+
+.page-button button {
+  height: 100%;
+  width: 100%;
+  background: #138DFF;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: #FFFFFF;
+}

@@ -12,7 +12,7 @@
   margin-bottom: 1rem;
   display: flex;
   flex-direction: row;
-  margin-left: 7.5vw;
+  margin-left: 8vw;
   position: relative;
 }
 
@@ -38,7 +38,7 @@
 /* Left Side*/
 .left-side {
   width: 70vw;
-  margin-left: 7.5vw;
+  margin-left: 8vw;
   margin-right: 1rem;
 }
 

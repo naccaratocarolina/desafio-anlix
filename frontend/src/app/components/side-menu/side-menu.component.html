@@ -1,39 +1,26 @@
-<div class="sidemenu">
-  <!--Logo-->
+<mat-drawer-container class="side-menu mat-typography">
+	<mat-drawer #drawer mode="side" disableClose="true" opened="true">
+		<mat-nav-list>
+			<mat-list-item routerLink="/dashboard">
+        <mat-icon aria-hidden="false">home</mat-icon>
+        <h4>Dashboard</h4>
+      </mat-list-item>
 
-  <!--Menu items-->
-  <div id="menu-items">
-    <ul>
-      <li>
-        <a href="/dashboard">
-          <span> <mat-icon aria-hidden="false" style="color: #138DFF;">home</mat-icon> </span>
-        </a>
-      </li>
+			<mat-list-item routerLink="/dashboard">
+				<mat-icon>assignment</mat-icon>
+				<h4>Registros</h4>
+			</mat-list-item>
 
-      <li>
-        <a href="/dashboard">
-          <span> <mat-icon>star_border</mat-icon> </span>
-        </a>
-      </li>
+			<mat-list-item routerLink="/dashboard">
+				<mat-icon> chat_bubble </mat-icon>
+				<h4>Mensagens</h4>
+			</mat-list-item>
 
-      <li>
-        <a href="/dashboard">
-          <span> <mat-icon>bookmark_border</mat-icon> </span>
-        </a>
-      </li>
+			<mat-list-item routerLink="/dashboard" class="exit">
+				<mat-icon style="color: #EB5757;">exit_to_app</mat-icon>
+				<h4>Sair</h4>
+			</mat-list-item>
 
-      <li>
-        <a href="/dashboard">
-          <span> <mat-icon> chat_bubble_outline</mat-icon> </span>
-        </a>
-      </li>
-    </ul>
-  </div>
-
-  <!--Exit-->
-  <div id="exit-item">
-    <a href="#">
-      <span> <mat-icon style="color: #EB5757;">exit_to_app</mat-icon> </span>
-    </a>
-  </div>
-</div>
+		</mat-nav-list>
+	</mat-drawer>
+</mat-drawer-container>

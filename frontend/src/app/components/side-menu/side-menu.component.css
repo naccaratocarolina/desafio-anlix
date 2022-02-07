@@ -4,40 +4,69 @@
   text-decoration: none;
 }
 
-/* Sidemenu */
-.sidemenu {
-    background: #FFFFFF;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 5vw;
-    height: 100%;
-    padding: 1rem;
-    transition: all 0.5s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.sidemenu #menu-items ul {
+.side-menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  padding-left: 1rem;
+  margin-right: 1rem;
+  transition: all 0.5s ease;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  height: 25vh;
-  margin: 0;
-  padding: 0;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.sidemenu mat-icon {
-    color: #989FB8;
-    font-size: 1.8rem;
+mat-drawer-container {
+  background-color: #FFFFFF;
 }
 
-.sidemenu #exit-item {
-  margin-bottom: 2rem;
+mat-drawer {
+  background-color: #FFFFFF;
 }
 
-::ng-deep .mat-checkbox .mat-checkbox-frame {
-  border-color: #989FB8;
+a:hover mat-icon, h4 {
+  color: #138DFF;
+}
+
+mat-icon, h4 {
+  color: #989FB8;
+}
+
+h4 {
+  font-size: 1rem;
+}
+
+mat-icon {
+  font-size: 1.7rem;
+}
+
+mat-list-item {
+  margin-bottom: 0.8rem;
+}
+
+mat-nav-list {
+  width: 7vw;
+  overflow: hidden;
+  transition: width 0.3s;
+}
+
+mat-nav-list h4 {
+  opacity: 0;
+}
+
+mat-drawer:hover mat-nav-list {
+  width: 180px;
+}
+
+mat-drawer:hover h4 {
+  opacity: 1;
+  margin: auto 1rem;
+  transition: all 0.1s ease-in 0.2s;
+}
+
+.exit {
+  position: absolute;
+  bottom: 0;
 }

@@ -40,7 +40,23 @@ export class DashboardComponent implements OnInit {
       });
   }
 
-  public createFilter() {
+  public getAllPatients () {
+    this.patientService.getAllPatients().subscribe({
+      next: (response) => {
+        this.patientService.patients = response.patients;
+        console.log(this.patientService.patients);
+
+        this.dataSource = new MatTableDataSource(this.patientService.patients);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.filterPredicate = this.createFilter();
+      },
+      error: (errorResponse) => {
+        console.log(errorResponse);
+      }
+    });
+  }
+
+  public createFilter () {
     let filterFunction = function (data: any, filter: string): boolean {
       let searchTerms = JSON.parse(filter);
       let nameSearch = () => {
@@ -58,20 +74,14 @@ export class DashboardComponent implements OnInit {
     return filterFunction
   }
 
-  public getAllPatients () {
-    this.patientService.getAllPatients().subscribe({
-      next: (response) => {
-        this.patientService.patients = response.patients;
-        console.log(this.patientService.patients);
+  public formatDateOfBirth (date_of_birth: Date) {
+    const date = new Date(date_of_birth);
 
-        this.dataSource = new MatTableDataSource(this.patientService.patients);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.filterPredicate = this.createFilter();
-      },
-      error: (errorResponse) => {
-        console.log(errorResponse);
-      }
-    });
+    const day = date.getDate() < 9 ? '0' + date.getDate() : date.getDate();
+    const month = (date.getMonth() + 1) < 9 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
+    const year = date.getFullYear();;
+
+    return day + '/' + month + '/' + year;
   }
 
 }

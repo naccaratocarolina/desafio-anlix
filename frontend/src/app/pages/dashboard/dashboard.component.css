@@ -12,7 +12,7 @@
   margin-bottom: 1rem;
   display: flex;
   flex-direction: row;
-  margin-left: 7.5vw;
+  margin-left: 8vw;
   position: relative;
 }
 
@@ -31,7 +31,7 @@
 
 /* Patients Table */
 .patients-table {
-  margin-left: 7.5vw;
+  margin-left: 8vw;
 }
 
 /* Title */

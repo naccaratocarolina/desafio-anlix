@@ -76,13 +76,16 @@
                 <mat-expansion-panel-header>
                   <!--Accordion Title-->
                   <mat-panel-title>
-                    <mat-icon>date_range</mat-icon>
+                    <mat-icon>filter_list</mat-icon>
                     Filtrar Características
                   </mat-panel-title>
                   <mat-panel-description>
 
                     <div class="page-button">
-                      <button mat-button class="mat-elevation-z0" (click)="exporter.exportTable('csv')">Exportar CSV</button>
+                      <button mat-button class="mat-elevation-z0" (click)="exporter.exportTable('csv')">
+                        <mat-icon>get_app</mat-icon>
+                        Exportar CSV
+                      </button>
                     </div>
 
                   </mat-panel-description>
@@ -93,6 +96,19 @@
                   <div class="form-title">
                     <h2>Características filtradas por</h2>
                   </div>
+                  <!--
+                  <h4>Índice:</h4>
+                  <div class="index-filter-container">
+                    <mat-form-field>
+                        <select matNativeControl (change)="filterChange(filter, $event)">
+                          <option value=""> Todos </option>
+                          <option value="ind_card">Cardíaco</option>
+                          <option value="ind_pulm">Pulmonar</option>
+                        </select>
+                        <mat-icon matSuffix>keyboard_arrow_down</mat-icon>
+                      </mat-form-field>
+                  </div>
+                  -->
 
                   <!--Date Filter-->
                   <h4>Período:</h4>
@@ -192,7 +208,7 @@
             <div mat-card-avatar class="patient-icon"></div>
             <mat-card-title> {{ patient.name }} </mat-card-title>
 
-            <mat-card-subtitle> <mat-icon>cake</mat-icon> {{ patient.date_of_birth }} </mat-card-subtitle>
+            <mat-card-subtitle> <mat-icon>cake</mat-icon> {{ formatDateOfBirth(patient.date_of_birth) }} </mat-card-subtitle>
           </mat-card-header>
 
           <mat-card-content>
@@ -217,7 +233,7 @@
                   <li>Mae: {{ patient.mother }}</li>
                   <li>Pai: {{ patient.father }}</li>
                   <li>Telefone fixo: {{ patient.landline }}</li>
-                  <li>Telefone phone_number: {{ patient.phone_number }}</li>
+                  <li>Celular: {{ patient.phone_number }}</li>
                   <li>Tipo Sanguineo: {{ patient.blood_type }}</li>
                   <li>CPF: {{ patient.cpf }}</li>
                   <li>RG: {{ patient.rg }}</li>

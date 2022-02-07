@@ -32,7 +32,7 @@ export class CharacteristicService {
       "Content-Type": "application/json"
     });
 
-    return this.http.get<CharacteristicResponse>(`${baseUrl}/characteristics/patients`, { headers });
+    return this.http.get<CharacteristicResponse>(`${baseUrl}/characteristics/`, { headers });
   }
 
   getAllPatientsCharacteristics (patientId: string): Observable<IndexResponse> {

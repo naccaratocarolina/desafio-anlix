@@ -155,6 +155,10 @@
   color: #989FB8;
 }
 
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #989FB8 !important;
+}
+
 /* Table */
 .characteristics-table table {
   width: 100%;

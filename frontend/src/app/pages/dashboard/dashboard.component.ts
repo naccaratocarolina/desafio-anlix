@@ -79,7 +79,7 @@ export class DashboardComponent implements OnInit {
   public formatDateOfBirth (date_of_birth: Date) {
     const date = new Date(date_of_birth);
 
-    const day = date.getDate() < 9 ? '0' + date.getDate() : date.getDate();
+    const day = (date.getDate() + 1) < 9 ? '0' + date.getDate() : (date.getDate() + 1);
     const month = (date.getMonth() + 1) < 9 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
     const year = date.getFullYear();;
 

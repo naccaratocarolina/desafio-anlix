@@ -14,12 +14,14 @@ import { MaterialModule } from "./material.module";
 import { HttpClientModule } from '@angular/common/http';
 import { NgApexchartsModule } from "ng-apexcharts";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CharacteristicsComponent } from './pages/characteristics/characteristics.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    PatientComponent
+    PatientComponent,
+    CharacteristicsComponent
   ],
   imports: [
     BrowserModule,

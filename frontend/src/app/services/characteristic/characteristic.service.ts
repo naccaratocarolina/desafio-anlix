@@ -26,6 +26,15 @@ export class CharacteristicService {
 
   constructor( private http: HttpClient ) { }
 
+  getAllCharacteristics (): Observable<CharacteristicResponse> {
+    const baseUrl = environment.baseUrl;
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json"
+    });
+
+    return this.http.get<CharacteristicResponse>(`${baseUrl}/characteristics/patients`, { headers });
+  }
+
   getAllPatientsCharacteristics (patientId: string): Observable<IndexResponse> {
     const baseUrl = environment.baseUrl;
     const headers = new HttpHeaders({

@@ -101,7 +101,7 @@ export class PatientComponent implements OnInit {
       this.pulmChartOptions = {
         series: [ { name: "Índice Pulmonar", data: pulm_data } ],
         chart: { height: 300, type: "area", zoom: { type: "xy" } },
-        dataLabels: { enabled: true },
+        dataLabels: { enabled: false },
         stroke: { curve: "smooth" },
         grid: { xaxis: { lines: { show: true } },
                 yaxis: { lines: { show: true } },
@@ -178,7 +178,6 @@ export class PatientComponent implements OnInit {
 
       this.ind_pulm_data.push(data);
 
-      console.log(this.ind_pulm_data);
       localStorage.setItem('ind_card', JSON.stringify(this.ind_card_data));
       localStorage.setItem('ind_pulm', JSON.stringify(this.ind_pulm_data));
     }

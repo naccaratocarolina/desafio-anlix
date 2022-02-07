@@ -118,14 +118,15 @@
   font-size: 1rem;
 }
 
-.characteristics-actions .form-title h4 {
-  margin-bottom: 0;
+.characteristics-actions h4 {
+  margin: 0;
 }
 
 .characteristics-actions .date-filter-container {
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-top: 0;
 }
 
 .characteristics-actions .date-filter {

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormControl } from '@angular/forms';
+import { MatAccordion } from '@angular/material/expansion';
 
 export interface SearchItem {
   name: string;
@@ -27,6 +28,7 @@ export class DashboardComponent implements OnInit {
   private filterValues = { name: '' }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatAccordion) accordion: MatAccordion;
 
   constructor( private router: Router, public patientService: PatientService ) { }
 
@@ -48,7 +50,7 @@ export class DashboardComponent implements OnInit {
 
         this.dataSource = new MatTableDataSource(this.patientService.patients);
         this.dataSource.paginator = this.paginator;
-        this.dataSource.filterPredicate = this.createFilter();
+        this.dataSource.filterPredicate = this.createFilter ();
       },
       error: (errorResponse) => {
         console.log(errorResponse);

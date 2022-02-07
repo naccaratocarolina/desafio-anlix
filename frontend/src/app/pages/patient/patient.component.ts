@@ -5,7 +5,8 @@ import { PatientService } from 'src/app/services/patient/patient.service';
 import { CharacteristicService } from 'src/app/services/characteristic/characteristic.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { SelectionModel } from '@angular/cdk/collections';
+import { DatePipe } from '@angular/common';
+import { FormControl, FormGroup } from '@angular/forms';
 import {
   ChartComponent,
   ApexAxisChartSeries,
@@ -49,12 +50,20 @@ export class PatientComponent implements OnInit {
   ind_pulm: any = [];
 
   dataSource: MatTableDataSource<any>;
-  selection = new SelectionModel<any>(true, []);
 
   typeEnum = TypeEnum;
   selectedState = TypeEnum.ind_card;
 
   panelOpenState = false;
+
+  pipe: DatePipe;
+  dataFilterForm = new FormGroup({
+    fromDate: new FormControl(),
+    toDate: new FormControl(),
+  });
+
+  get fromDate() { return this.dataFilterForm.get('fromDate')?.value; }
+  get toDate() { return this.dataFilterForm.get('toDate')?.value; }
 
   /* Chart */
   @ViewChild("cardChart") cardChart: ChartComponent;
@@ -72,6 +81,8 @@ export class PatientComponent implements OnInit {
   constructor( private route: ActivatedRoute,
     private patientService: PatientService,
     private characteristicService: CharacteristicService ) {
+      this.pipe = new DatePipe('en');
+
       var card_data = JSON.parse(localStorage.getItem("ind_card") as string);
       var pulm_data = JSON.parse(localStorage.getItem("ind_pulm") as string);
 
@@ -185,11 +196,25 @@ export class PatientComponent implements OnInit {
 
         this.dataSource = new MatTableDataSource(this.characteristics);
         this.dataSource.paginator = this.paginator;
+
+        this.dataSource.filterPredicate = (data, filter) => {
+          if (this.fromDate && this.toDate) {
+            const timestamp: number = parseInt(data.epoch);
+            const date = new Date(timestamp * 1000);
+
+            return date >= this.fromDate && date <= this.toDate;
+          }
+          return true;
+        }
       },
       error: (errorResponse) => {
         console.log(errorResponse);
       }
     });
+  }
+
+  public applyFilter () {
+    this.dataSource.filter = '' + Math.random();
   }
 
   public getPacientCharacteristic (id: string) {
@@ -203,19 +228,5 @@ export class PatientComponent implements OnInit {
         console.log(errorResponse);
       }
     });
-  }
-
-  /** Whether the number of selected elements matches the total number of rows. */
-  isAllSelected () {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected === numRows;
-  }
-
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle () {
-    this.isAllSelected() ?
-        this.selection.clear() :
-        this.dataSource.data.forEach(row => this.selection.select(row));
   }
 }

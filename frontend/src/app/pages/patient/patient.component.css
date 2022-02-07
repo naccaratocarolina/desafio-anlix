@@ -91,17 +91,67 @@
 }
 
 /* Actions */
-.characteristic-actions {
-  background: #FFFFFF;
-  height: 6vh;
-  width: 100%;
+.characteristics-actions .page-button {
+  position: absolute;
+  right: 3.5rem;
+}
+
+.characteristics-actions .mat-expansion-panel {
+  background-color: #FFFFFF !important;
+  padding: #FFFFFF !important;
+  color: #989FB8 !important;
+}
+
+.characteristics-actions .mat-expansion-panel-header-title, mat-label {
+  color: #989FB8 !important;
+}
+
+::ng-deep .mat-expansion-indicator:after {
+  color: #989FB8;
+}
+
+.characteristics-actions mat-icon {
+  margin-right: 0.5rem;
+}
+
+.characteristics-actions .form-title h2 {
+  font-size: 1rem;
+}
+
+.characteristics-actions .form-title h4 {
+  margin-bottom: 0;
+}
+
+.characteristics-actions .date-filter-container {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.patient-actions .page-button {
+.characteristics-actions .date-filter {
   margin-right: 1rem;
+}
+
+.characteristics-actions button {
+  height: 50%;
+  background: #138DFF;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: #FFFFFF;
+  margin-right: 1rem;
+}
+
+::ng-deep .mat-icon-button, .mat-stroked-button {
+  color: #989FB8;
+}
+
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-label {
+  font-size: 1rem;
+  color: #989FB8;
 }
 
 /* Table */
@@ -197,19 +247,19 @@
   font-size: 1.2rem;
 }
 
-.mat-card-content .mat-expansion-panel {
+#patient-info .mat-card-content .mat-expansion-panel {
   background-color: #FFFFFF !important;
   padding: #FFFFFF !important;
   color: #989FB8 !important;
 }
 
-.mat-expansion-panel-header-title {
+#patient-info .mat-expansion-panel-header-title {
   color: #989FB8 !important;
   display: flex;
   justify-content: space-between;
 }
 
-.patient-icon {
+#patient-info .patient-icon {
   width: 3.5rem;
   height: 3.5rem;
   background-image: url('https://cdn0.iconfinder.com/data/icons/mobile-device/512/man-body-person-blue-round-512.png');

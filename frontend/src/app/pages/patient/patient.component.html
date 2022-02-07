@@ -70,10 +70,61 @@
           </div>
 
           <!--Actions-->
-          <div class="characteristic-actions page-button">
-            <div class="page-button">
-              <button mat-raised-button class="mat-elevation-z0" (click)="exporter.exportTable('csv')">Exportar CSV</button>
-            </div>
+          <div class="characteristics-actions">
+            <mat-accordion>
+              <mat-expansion-panel class="mat-elevation-z0">
+                <mat-expansion-panel-header>
+                  <!--Accordion Title-->
+                  <mat-panel-title>
+                    <mat-icon>date_range</mat-icon>
+                    Filtrar Características
+                  </mat-panel-title>
+                  <mat-panel-description>
+
+                    <div class="page-button">
+                      <button mat-button class="mat-elevation-z0" (click)="exporter.exportTable('csv')">Exportar CSV</button>
+                    </div>
+
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <!--Date Filter-->
+                <form [formGroup]="dataFilterForm">
+                  <div class="form-title">
+                    <h2>Características filtradas por</h2>
+                    <h4>Período:</h4>
+                  </div>
+                  <!--From-->
+                  <div class="date-filter-container">
+                  	<div class="date-filter">
+                      <mat-form-field>
+                        <input matInput
+                          [matDatepicker]="fromDate"
+                          placeholder="Data inicial"
+                          formControlName="fromDate">
+                        <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+                        <mat-datepicker #fromDate></mat-datepicker>
+                      </mat-form-field>
+                    </div>
+                    <div class="date-filter"><p>à</p></div>
+                    <!--To-->
+                    <div class="date-filter">
+                      <mat-form-field>
+                        <input matInput
+                          [matDatepicker]="toDate"
+                          placeholder="Data final"
+                          formControlName="toDate">
+                        <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+                        <mat-datepicker #toDate></mat-datepicker>
+                      </mat-form-field>
+                    </div>
+                     <button mat-button class="mat-elevation-z0" (click)="applyFilter()">Filtrar</button>
+                     <button mat-button class="mat-elevation-z0" (click)="applyFilter()">Limpar</button>
+                  </div>
+                </form>
+
+              </mat-expansion-panel>
+            </mat-accordion>
           </div>
 
           <!--Table-->
@@ -120,8 +171,7 @@
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-                (click)="selection.toggle(row)"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
 
           <mat-paginator [pageSizeOptions]="[4, 12]" [showFirstLastButtons]="true"></mat-paginator>

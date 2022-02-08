@@ -18,7 +18,7 @@ export interface SearchItem {
 })
 
 export class DashboardComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'date_of_birth', 'name', 'age', 'gender', 'settings'];
+  displayedColumns: string[] = ['id', 'date_of_birth', 'name', 'age', 'gender', 'color', 'blood_type', 'settings'];
 
   patient: any;
 

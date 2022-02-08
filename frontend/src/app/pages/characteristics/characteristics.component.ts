@@ -14,10 +14,12 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class CharacteristicsComponent implements OnInit {
   pageName: string = "Registros das Características";
-  displayedColumns: string[] = ['id', 'type', 'epoch', 'time', 'index'];
 
+  /* Table */
+  displayedColumns: string[] = ['id', 'type', 'epoch', 'time', 'index'];
   dataSource: MatTableDataSource<any>;
 
+  /* Date Filter */
   pipe: DatePipe;
   dataFilterForm = new FormGroup({
     fromDate: new FormControl()
@@ -25,10 +27,11 @@ export class CharacteristicsComponent implements OnInit {
 
   get fromDate() { return this.dataFilterForm.get('fromDate')?.value; }
 
-
+  /* Paginator */
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor( private router: Router, public characteristicService: CharacteristicService ) {
+    /* Initializing Date Filter */
     this.pipe = new DatePipe('en');
   }
 
@@ -36,15 +39,19 @@ export class CharacteristicsComponent implements OnInit {
     this.getAllCharacteristics();
   }
 
+  /* Query database and get all registered characteristics */
   public getAllCharacteristics () {
     this.characteristicService.getAllCharacteristics().subscribe({
       next: (response) => {
+        /* Get characteristics records and saves in service variable */
         this.characteristicService.characteristics = response.characteristics;
         console.log(this.characteristicService.characteristics);
 
+        /* Initialize table data and paginator from characteristics service object */
         this.dataSource = new MatTableDataSource(this.characteristicService.characteristics);
         this.dataSource.paginator = this.paginator;
 
+        /* Create date filter */
         this.dataSource.filterPredicate = (data, filter) => {
           if (this.fromDate) {
             const timestamp: number = parseInt(data.epoch);
@@ -63,6 +70,7 @@ export class CharacteristicsComponent implements OnInit {
     });
   }
 
+  /* Format date (dd/mm/aaaa) */
   public getDate (epoch: string) {
     const timestamp: number = parseInt(epoch);
     const date = new Date(timestamp * 1000);
@@ -74,6 +82,7 @@ export class CharacteristicsComponent implements OnInit {
     return day + '/' + month + '/' + year;
   }
 
+  /* Format time (hh:mm:ss) */
   public getTime (epoch: string) {
     const timestamp: number = parseInt(epoch);
     const date = new Date(timestamp * 1000);
@@ -85,20 +94,23 @@ export class CharacteristicsComponent implements OnInit {
     return hours + ':' + minutes + ':' + seconds;
   }
 
-  public formatType (type: string) {
-    return type === "ind_card"? "Índice Cardíaco" : "Índice Pulmonar";
-  }
-
+  /* Format index (round float number to 2 decimal cases) */
   public formatIndex (index: number) {
     return Math.round((index + Number.EPSILON) * 100) / 100
   }
 
+  /* Format type (Índice Cardíaco | Pulmonar) */
+  public formatType (type: string) {
+    return type === "ind_card"? "Índice Cardíaco" : "Índice Pulmonar";
+  }
+
+  /* Apply date filter */
   public applyFilter () {
     this.dataSource.filter = '' + Math.random();
   }
 
+  /* Clear date filter */
   public resetFilters () {
     this.dataSource.filter = '';
   }
-
 }

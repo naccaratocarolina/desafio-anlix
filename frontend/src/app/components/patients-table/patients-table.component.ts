@@ -12,15 +12,17 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./patients-table.component.css']
 })
 export class PatientsTableComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'date_of_birth', 'name', 'age', 'gender', 'color', 'blood_type', 'patient-page'];
-
   patient: any;
 
+  /* Table */
+  displayedColumns: string[] = ['id', 'date_of_birth', 'name', 'age', 'gender', 'color', 'blood_type', 'patient-page'];
   dataSource: MatTableDataSource<any>;
 
+  /* Name Filter */
   nameFilter = new FormControl();
   private filterValues = { name: '' }
 
+  /* Paginator */
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor( private router: Router, public patientService: PatientService ) {}
@@ -28,6 +30,7 @@ export class PatientsTableComponent implements OnInit {
   ngOnInit(): void {
     this.getAllPatients();
 
+    /* Initialize name filter */
     this.nameFilter.valueChanges
       .subscribe(value => {
         this.filterValues['name'] = value
@@ -35,14 +38,19 @@ export class PatientsTableComponent implements OnInit {
       });
   }
 
+  /* Query database and get all registered patients */
   public getAllPatients () {
     this.patientService.getAllPatients().subscribe({
       next: (response) => {
+        /* Get patients records and saves in service variable */
         this.patientService.patients = response.patients;
         console.log(this.patientService.patients);
 
+        /* Initialize table data and paginator from patients service object */
         this.dataSource = new MatTableDataSource(this.patientService.patients);
         this.dataSource.paginator = this.paginator;
+
+        /* Create name filter */
         this.dataSource.filterPredicate = this.createFilter ();
       },
       error: (errorResponse) => {
@@ -51,6 +59,7 @@ export class PatientsTableComponent implements OnInit {
     });
   }
 
+  /* Create name filter */
   public createFilter () {
     let filterFunction = function (data: any, filter: string): boolean {
       let searchTerms = JSON.parse(filter);
@@ -69,6 +78,7 @@ export class PatientsTableComponent implements OnInit {
     return filterFunction
   }
 
+  /* Format date of birth (dd/mm/aaaa) */
   public formatDateOfBirth (date_of_birth: Date) {
     const date = new Date(date_of_birth);
 
@@ -78,5 +88,4 @@ export class PatientsTableComponent implements OnInit {
 
     return day + '/' + month + '/' + year;
   }
-
 }

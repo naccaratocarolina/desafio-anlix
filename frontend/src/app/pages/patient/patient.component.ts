@@ -40,9 +40,8 @@ export type ChartOptions = {
 })
 export class PatientComponent implements OnInit {
   pageName: string = "Página do Paciente";
-  displayedColumns: string[] = ['id', 'type', 'epoch', 'time', 'index'];
 
-  id: any;
+  id: any; // patient id
 
   patient: any = [];
   lastCharacteristics: any = [];
@@ -50,13 +49,15 @@ export class PatientComponent implements OnInit {
   ind_card: any = [];
   ind_pulm: any = [];
 
+  /* Table */
+  displayedColumns: string[] = ['id', 'type', 'epoch', 'time', 'index'];
   dataSource: MatTableDataSource<any>;
 
+  /* Toggle Button */
   typeEnum = TypeEnum;
   selectedState = TypeEnum.ind_card;
 
-  panelOpenState = false;
-
+  /* Date Filter */
   pipe: DatePipe;
   dataFilterForm = new FormGroup({
     fromDate: new FormControl(),
@@ -82,11 +83,14 @@ export class PatientComponent implements OnInit {
   constructor( private route: ActivatedRoute,
     private patientService: PatientService,
     private characteristicService: CharacteristicService ) {
+      /* Initializing Date Filter */
       this.pipe = new DatePipe('en');
 
+      /* Chart Data */
       var card_data = JSON.parse(localStorage.getItem("ind_card") as string);
       var pulm_data = JSON.parse(localStorage.getItem("ind_pulm") as string);
 
+      /* Initializing ind_card chart */
       this.cardChartOptions = {
         series: [ { name: "Índice Cardíaco", data: card_data } ],
         chart: { height: 300, type: "area", zoom: { type: "xy" } },
@@ -99,6 +103,7 @@ export class PatientComponent implements OnInit {
         xaxis: { type: 'datetime' }
       };
 
+      /* Initializing ind_pulm chart */
       this.pulmChartOptions = {
         series: [ { name: "Índice Pulmonar", data: pulm_data } ],
         chart: { height: 300, type: "area", zoom: { type: "xy" } },
@@ -113,6 +118,7 @@ export class PatientComponent implements OnInit {
     }
 
   ngOnInit (): void {
+    /* Retrieving patient id */
     this.route.paramMap.subscribe(params => {
         this.id = params.get('id');
       });
@@ -122,47 +128,13 @@ export class PatientComponent implements OnInit {
     this.getPacientCharacteristic(this.id);
   }
 
+  /* Toggle button function */
   public onChange ($event: any) {
     console.log($event.value);
     this.selectedState = $event.value;
   }
 
-  public getDate (epoch: string) {
-    const timestamp: number = parseInt(epoch);
-    const date = new Date(timestamp * 1000);
-
-    const day = date.getDate() < 9 ? '0' + date.getDate() : date.getDate();
-    const month = (date.getMonth() + 1) < 9 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
-    const year = date.getFullYear();;
-
-    return day + '/' + month + '/' + year;
-  }
-
-  public getTime (epoch: string) {
-    const timestamp: number = parseInt(epoch);
-    const date = new Date(timestamp * 1000);
-
-    const hours = date.getHours() < 9 ? '0' + date.getHours() : date.getHours();
-    const minutes = date.getMinutes() < 9 ? '0' + date.getMinutes() : date.getMinutes();
-    const seconds = date.getSeconds() < 9 ? '0' + date.getSeconds() : date.getSeconds();
-
-    return hours + ':' + minutes + ':' + seconds;
-  }
-
-  public formatDateOfBirth (date_of_birth: Date) {
-    const date = new Date(date_of_birth);
-
-    const day = (date.getDate() + 1) < 9 ? '0' + date.getDate() : (date.getDate() + 1);
-    const month = (date.getMonth() + 1) < 9 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
-    const year = date.getFullYear();
-
-    return day + '/' + month + '/' + year;
-  }
-
-  public formatIndex (index: number) {
-    return Math.round((index + Number.EPSILON) * 100) / 100
-  }
-
+  /* Query database and get patient from id = id */
   public getPatient (id: string) {
     this.patientService.getPatient(id).subscribe({
       next: (response) => {
@@ -175,6 +147,7 @@ export class PatientComponent implements OnInit {
     });
   }
 
+  /* Generates cardiac and pulmonary indices data for the chart */
   public generateChartData () {
     for (const item of this.ind_card) {
       const data = {
@@ -198,20 +171,27 @@ export class PatientComponent implements OnInit {
     }
   }
 
+  /* Query database and get all patient characteristics from id = id */
   public getAllPatientsCharacteristics (id: string) {
     this.characteristicService.getAllPatientsCharacteristics(id).subscribe({
       next: (response) => {
+        /* Get indexes records and saves them in different variables */
         this.ind_card = response.ind_card;
         this.ind_pulm = response.ind_pulm;
 
+        /* Generate chart data from data returned from backend route */
         this.generateChartData();
 
+        /* Create the object with all the patient characteristics by
+           concatenating the ind_card and ind_pulm objects */
         this.characteristics = this.ind_card.concat(this.ind_pulm);
         console.log(this.characteristics);
 
+        /* Initialize table data and paginator from characteristics object */
         this.dataSource = new MatTableDataSource(this.characteristics);
         this.dataSource.paginator = this.paginator;
 
+        /* Create filter by date range */
         this.dataSource.filterPredicate = (data, filter) => {
           if (this.fromDate && this.toDate) {
             const timestamp: number = parseInt(data.epoch);
@@ -228,18 +208,7 @@ export class PatientComponent implements OnInit {
     });
   }
 
-  public applyFilter () {
-    this.dataSource.filter = '' + Math.random();
-  }
-
-  public resetFilters () {
-    this.dataSource.filter = '';
-  }
-
-  public formatType (type: string) {
-    return type === "ind_card"? "Índice Cardíaco" : "Índice Pulmonar";
-  }
-
+  /* Query database and get the last records from ind_card and ind_pulm */
   public getPacientCharacteristic (id: string) {
     this.characteristicService.getPacientCharacteristic(id).subscribe({
       next: (response) => {
@@ -251,5 +220,60 @@ export class PatientComponent implements OnInit {
         console.log(errorResponse);
       }
     });
+  }
+
+  /* Format date (dd/mm/aaaa) */
+  public getDate (epoch: string) {
+    const timestamp: number = parseInt(epoch);
+    const date = new Date(timestamp * 1000);
+
+    const day = date.getDate() < 9 ? '0' + date.getDate() : date.getDate();
+    const month = (date.getMonth() + 1) < 9 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
+    const year = date.getFullYear();;
+
+    return day + '/' + month + '/' + year;
+  }
+
+  /* Format time (hh:mm:ss) */
+  public getTime (epoch: string) {
+    const timestamp: number = parseInt(epoch);
+    const date = new Date(timestamp * 1000);
+
+    const hours = date.getHours() < 9 ? '0' + date.getHours() : date.getHours();
+    const minutes = date.getMinutes() < 9 ? '0' + date.getMinutes() : date.getMinutes();
+    const seconds = date.getSeconds() < 9 ? '0' + date.getSeconds() : date.getSeconds();
+
+    return hours + ':' + minutes + ':' + seconds;
+  }
+
+  /* Format date of birth (dd/mm/aaaa) */
+  public formatDateOfBirth (date_of_birth: Date) {
+    const date = new Date(date_of_birth);
+
+    const day = (date.getDate() + 1) < 9 ? '0' + date.getDate() : (date.getDate() + 1);
+    const month = (date.getMonth() + 1) < 9 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
+    const year = date.getFullYear();
+
+    return day + '/' + month + '/' + year;
+  }
+
+  /* Format index (round float number to 2 decimal cases) */
+  public formatIndex (index: number) {
+    return Math.round((index + Number.EPSILON) * 100) / 100
+  }
+
+  /* Format type (Índice Cardíaco | Pulmonar) */
+  public formatType (type: string) {
+    return type === "ind_card"? "Índice Cardíaco" : "Índice Pulmonar";
+  }
+
+  /* Apply date filter */
+  public applyFilter () {
+    this.dataSource.filter = '' + Math.random();
+  }
+
+  /* Clear date filter */
+  public resetFilters () {
+    this.dataSource.filter = '';
   }
 }

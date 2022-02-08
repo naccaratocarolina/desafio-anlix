@@ -13,6 +13,7 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./characteristics.component.css']
 })
 export class CharacteristicsComponent implements OnInit {
+  pageName: string = "Registros das Características";
   displayedColumns: string[] = ['id', 'type', 'epoch', 'time', 'index', 'settings'];
 
   dataSource: MatTableDataSource<any>;

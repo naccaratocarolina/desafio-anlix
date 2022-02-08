@@ -39,6 +39,7 @@ export type ChartOptions = {
   styleUrls: ['./patient.component.css']
 })
 export class PatientComponent implements OnInit {
+  pageName: string = "Pagina do Paciente";
   displayedColumns: string[] = ['id', 'type', 'epoch', 'time', 'index', 'settings'];
 
   id: any;

@@ -18,6 +18,8 @@ export interface SearchItem {
 })
 
 export class DashboardComponent implements OnInit {
+  pageName: string = "Dashboard";
+
   displayedColumns: string[] = ['id', 'date_of_birth', 'name', 'age', 'gender', 'color', 'blood_type', 'settings'];
 
   patient: any;

@@ -82,12 +82,10 @@
         </ng-container>
 
         <!-- Settings Column -->
-        <ng-container matColumnDef="settings">
-          <th mat-header-cell *matHeaderCellDef> Ações </th>
+        <ng-container matColumnDef="patient-page">
+          <th mat-header-cell *matHeaderCellDef> Página do paciente </th>
           <td mat-cell *matCellDef="let patient">
             <div id="actions">
-              <mat-icon>edit</mat-icon>
-              <mat-icon style="color: #EB5757;">delete</mat-icon>
               <a [routerLink]="['/patient', patient.id]"><mat-icon>open_in_new</mat-icon></a>
             </div>
           </td>

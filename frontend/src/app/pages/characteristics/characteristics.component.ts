@@ -14,7 +14,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class CharacteristicsComponent implements OnInit {
   pageName: string = "Registros das Características";
-  displayedColumns: string[] = ['id', 'type', 'epoch', 'time', 'index', 'settings'];
+  displayedColumns: string[] = ['id', 'type', 'epoch', 'time', 'index'];
 
   dataSource: MatTableDataSource<any>;
 
@@ -87,6 +87,10 @@ export class CharacteristicsComponent implements OnInit {
 
   public formatType (type: string) {
     return type === "ind_card"? "Índice Cardíaco" : "Índice Pulmonar";
+  }
+
+  public formatIndex (index: number) {
+    return Math.round((index + Number.EPSILON) * 100) / 100
   }
 
   public applyFilter () {

@@ -39,8 +39,8 @@ export type ChartOptions = {
   styleUrls: ['./patient.component.css']
 })
 export class PatientComponent implements OnInit {
-  pageName: string = "Pagina do Paciente";
-  displayedColumns: string[] = ['id', 'type', 'epoch', 'time', 'index', 'settings'];
+  pageName: string = "Página do Paciente";
+  displayedColumns: string[] = ['id', 'type', 'epoch', 'time', 'index'];
 
   id: any;
 
@@ -157,6 +157,10 @@ export class PatientComponent implements OnInit {
     const year = date.getFullYear();
 
     return day + '/' + month + '/' + year;
+  }
+
+  public formatIndex (index: number) {
+    return Math.round((index + Number.EPSILON) * 100) / 100
   }
 
   public getPatient (id: string) {

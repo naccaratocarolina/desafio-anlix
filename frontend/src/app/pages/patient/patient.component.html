@@ -156,18 +156,7 @@
             <!-- Index Column -->
             <ng-container matColumnDef="index">
               <th mat-header-cell *matHeaderCellDef> Valor </th>
-              <td mat-cell *matCellDef="let characteristic"> {{ characteristic.index }} </td>
-            </ng-container>
-
-            <!-- Settings Column -->
-            <ng-container matColumnDef="settings">
-              <th mat-header-cell *matHeaderCellDef> Ações </th>
-              <td mat-cell *matCellDef="let patient">
-                <div id="actions">
-                  <mat-icon>edit</mat-icon>
-                  <mat-icon style="color: #EB5757;">delete</mat-icon>
-                </div>
-              </td>
+              <td mat-cell *matCellDef="let characteristic"> {{ formatIndex(characteristic.index) }} </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -268,7 +257,7 @@
           </mat-card-header>
 
           <mat-card-content>
-            Índice: {{ characteristic.index }}
+            Índice: {{ formatIndex(characteristic.index) }}
           </mat-card-content>
         </mat-card>
 

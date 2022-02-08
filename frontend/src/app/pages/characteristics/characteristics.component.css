@@ -109,6 +109,10 @@
   color: #989FB8 !important;
 }
 
+::ng-deep .mat-select-value {
+  color: #989FB8 !important;
+}
+
 /* Table */
 .characteristics-table table {
   width: 100%;

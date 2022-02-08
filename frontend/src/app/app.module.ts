@@ -11,6 +11,7 @@ import { CharacteristicsComponent } from './pages/characteristics/characteristic
 
 import { SideMenuModule } from "./components/side-menu/side-menu.module";
 import { ToolbarModule } from "./components/toolbar/toolbar.module";
+import { PatientsTableModule } from "./components/patients-table/patients-table.module";
 import { MaterialModule } from "./material.module";
 
 import { HttpClientModule } from '@angular/common/http';
@@ -30,6 +31,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     SideMenuModule,
     ToolbarModule,
+    PatientsTableModule,
     HttpClientModule,
     MaterialModule,
     NgApexchartsModule,

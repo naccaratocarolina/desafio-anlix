@@ -89,53 +89,6 @@ const destroy = async (req, res) => {
     }
 };
 
-// Consultar para uma determinada data (dia, mês e ano),
-// todas as características existentes de todos os pacientes da base de dados;
-const dates = async (req, res) => {
-  const from = new Date(req.body.from + " 00:00:00");
-  const to = new Date(req.body.to + " 00:00:00");
-
-  try {
-    const characteristics = await Characteristic.findAll({ where: { epoch: { [Op.between]: [from, to] } }, order: [ ['epoch', 'DESC'] ] });
-    return res.status(200).json({ characteristics });
-  } catch (err) {
-    return res.status(500).json({ err });
-  }
-};
-
-// Consultar uma característica qualquer de um paciente para um intervalo
-// de datas a ser especificado na chamada da API;
-const rangeDate = async (req, res)  => {
-  const { id } = req.params;
-  const from = new Date(req.body.from + " 00:00:00");
-  const to = new Date(req.body.to + " 00:00:00");
-
-  try {
-    const characteristics = await Characteristic.findOne({ where: { patientId: id, epoch: { [Op.between]: [from, to] } }, order: [ ['epoch', 'DESC'] ] });
-
-    return res.status(200).json({ characteristics });
-  } catch (err) {
-    return res.status(500).json({ err });
-  }
-};
-
-// Consultar o valor mais recente de uma característica de um paciente que
-// esteja entre um intervalo de valores a ser especificado na chamada da API;
-const rangeInd = async (req, res) => {
-  const id = req.params.id;
-  const type = (req.params.type == 1) ? "ind_card" : "ind_pulm";
-  const from = req.body.from;
-  const to = req.body.to;
-
-  console.log(from);
-  try {
-    const characteristics = await Characteristic.findOne({ where: { patientId: id, type: type, index: { [Op.between]: [from, to] } }, order: [ ['epoch', 'DESC'] ] })
-    return res.status(200).json({ characteristics });
-  } catch (err) {
-    return res.status(500).json({ err });
-  }
-};
-
 module.exports = {
     index,
     indexPatientCharacteristic,
@@ -143,7 +96,4 @@ module.exports = {
     create,
     update,
     destroy,
-    dates,
-    rangeDate,
-    rangeInd,
 }

@@ -9,7 +9,6 @@ const router = Router();
 // Rotas de Patient
 router.get('/patients', PatientController.index);
 router.get('/patients/:id', PatientController.show);
-router.get('/patients/characteristics/names', PatientController.name);
 router.post('/patients', PatientController.create);
 router.put('/patients/:id', PatientController.update);
 router.delete('/patients/:id', PatientController.destroy);
@@ -17,10 +16,7 @@ router.delete('/patients/:id', PatientController.destroy);
 // Rotas de Characteristic
 router.get('/characteristics/', CharacteristicController.index);
 router.get('/characteristics/patients/:id', CharacteristicController.indexPatientCharacteristic);
-router.get('/characteristics/patients/show/:id', CharacteristicController.show);
-//router.get('/characteristics', CharacteristicController.dates);
-//router.get('/dates/:id', CharacteristicController.rangeDate);
-//router.get('/ind/:id/:type', CharacteristicController.rangeInd);
+router.get('/characteristics/patients/indexes/:id', CharacteristicController.show);
 router.post('/characteristics/patients/:id', CharacteristicController.create);
 router.put('/characteristics/patients/:id', CharacteristicController.update);
 router.delete('/characteristics/patients/:id', CharacteristicController.destroy);

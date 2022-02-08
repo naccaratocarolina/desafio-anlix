@@ -10,6 +10,7 @@ import { PatientComponent } from './pages/patient/patient.component';
 import { CharacteristicsComponent } from './pages/characteristics/characteristics.component';
 
 import { SideMenuModule } from "./components/side-menu/side-menu.module";
+import { ToolbarModule } from "./components/toolbar/toolbar.module";
 import { MaterialModule } from "./material.module";
 
 import { HttpClientModule } from '@angular/common/http';
@@ -21,13 +22,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppComponent,
     DashboardComponent,
     PatientComponent,
-    CharacteristicsComponent
+    CharacteristicsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     SideMenuModule,
+    ToolbarModule,
     HttpClientModule,
     MaterialModule,
     NgApexchartsModule,

@@ -3,18 +3,7 @@
   text-decoration: none;
 }
 
-/* Header */
-.header {
-  background: #FFFFFF;
-  height: 6vh;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  display: flex;
-  flex-direction: row;
-  margin-left: 8vw;
-  position: relative;
-}
-
+/* Button Config */
 .page-button button {
   height: 100%;
   width: 100%;

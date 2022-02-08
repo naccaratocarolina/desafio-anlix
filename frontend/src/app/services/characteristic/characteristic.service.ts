@@ -50,6 +50,6 @@ export class CharacteristicService {
       "Content-Type": "application/json"
     });
 
-    return this.http.get<IndexResponse>(`${baseUrl}/characteristics/patients/show/${patientId}`, { headers });
+    return this.http.get<IndexResponse>(`${baseUrl}/characteristics/patients/indexes/${patientId}`, { headers });
   }
 }

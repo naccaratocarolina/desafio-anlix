@@ -9,12 +9,8 @@
     <!--Side menu-->
     <app-side-menu></app-side-menu>
 
-    <!--Header-->
-    <div class="header">
-      <div class="page-button">
-        <button mat-raised-button class="mat-elevation-z0">Adicionar paciente</button>
-      </div>
-    </div>
+    <!--Toolbar-->
+    <app-toolbar [pageName]="pageName"></app-toolbar>
 
     <!--Display de pacientes-->
     <div class="patients-table">

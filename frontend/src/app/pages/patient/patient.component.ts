@@ -202,6 +202,7 @@ export class PatientComponent implements OnInit {
 
         /* Create filter by date range */
         this.dataSource.filterPredicate = (data, filter) => {
+          /* Date Filter */
           if (this.fromDate && this.toDate) {
             const timestamp: number = parseInt(data.epoch);
             const date = new Date(timestamp * 1000);
@@ -209,7 +210,8 @@ export class PatientComponent implements OnInit {
             return date >= this.fromDate && date <= this.toDate;
           }
 
-          else {
+          /* Type Filter */
+          if (this.indCardToggle || this.indPulmToggle) {
             const filterValues = JSON.parse(filter);
 
             return (this.indCardToggle ? data.type.trim().toLowerCase() === filterValues.type : true) &&

@@ -211,12 +211,14 @@ export class PatientComponent implements OnInit {
           }
 
           /* Type Filter */
-          if (this.indCardToggle || this.indPulmToggle) {
+          else {
             const filterValues = JSON.parse(filter);
+            console.log(filterValues.type)
 
             return (this.indCardToggle ? data.type.trim().toLowerCase() === filterValues.type : true) &&
-            (this.indPulmToggle ? data.type.trim().toLowerCase().indexOf(filterValues.type) !== -1 : true);
+            (this.indPulmToggle ? data.type.trim().toLowerCase() === filterValues.type : true);
           }
+          
           return true;
         }
 

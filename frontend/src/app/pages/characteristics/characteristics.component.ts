@@ -73,11 +73,11 @@ export class CharacteristicsComponent implements OnInit {
           }
 
           /* Type Filter */
-          if (this.indCardToggle || this.indPulmToggle) {
+          else {
             const filterValues = JSON.parse(filter);
 
             return (this.indCardToggle ? data.type.trim().toLowerCase() === filterValues.type : true) &&
-            (this.indPulmToggle ? data.type.trim().toLowerCase().indexOf(filterValues.type) !== -1 : true);
+            (this.indPulmToggle ? data.type.trim().toLowerCase() === filterValues.type : true);
           }
 
           return true;
@@ -128,10 +128,6 @@ export class CharacteristicsComponent implements OnInit {
     this.filterValues[column] = filterValue;
 
     this.dataSource.filter = JSON.stringify(this.filterValues);
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
   }
 
   /* Apply date filter */

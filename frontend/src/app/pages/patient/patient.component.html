@@ -87,35 +87,35 @@
                   </mat-panel-description>
                 </mat-expansion-panel-header>
 
+                <div class="form-title">
+                  <h2>Características filtradas por</h2>
+                </div>
+
+                <!--Type Filter-->
+                <h4>Indice:</h4>
+                <div class="type-filter">
+                  <mat-checkbox [ngModelOptions]="{ standalone: true }" [(ngModel)]="indCardToggle" (change)="applyTypeFilter('type', indCardToggle ? 'ind_card': '')">
+                    Indice Cardíaco
+                  </mat-checkbox>
+
+                  <mat-checkbox [ngModelOptions]="{ standalone: true }" [(ngModel)]="indPulmToggle" (change)="applyTypeFilter('type', indPulmToggle ? 'ind_pulm': '')">
+                    Indice Pulmonar
+                  </mat-checkbox>
+                </div>
+
                 <!--Date Filter-->
+                <h4>Período:</h4>
                 <form [formGroup]="dataFilterForm">
-                  <div class="form-title">
-                    <h2>Características filtradas por</h2>
-                  </div>
-
-                  <!--Type Filter-->
-                  <h4>Indice:</h4>
-                  <div class="type-filter">
-                    <mat-checkbox [ngModelOptions]="{ standalone: true }" [(ngModel)]="indCardToggle" (change)="applyTypeFilter('type', indCardToggle ? 'ind_card': '')">
-                      Indice Cardíaco
-                    </mat-checkbox>
-
-                    <mat-checkbox [ngModelOptions]="{ standalone: true }" [(ngModel)]="indPulmToggle" (change)="applyTypeFilter('type', indPulmToggle ? 'ind_pulm': '')">
-                      Indice Pulmonar
-                    </mat-checkbox>
-                  </div>
-
-                  <!--Date Filter-->
-                  <h4>Período:</h4>
                   <div class="date-filter-container">
                   	<div class="date-filter">
                       <mat-form-field>
                         <input matInput
                           [matDatepicker]="fromDate"
                           placeholder="Data inicial"
-                          formControlName="fromDate">
+                          formControlName="fromDate"
+                          (click)="from.open()">
                         <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
-                        <mat-datepicker #fromDate></mat-datepicker>
+                        <mat-datepicker #fromDate #from></mat-datepicker>
                       </mat-form-field>
                     </div>
                     <div class="date-filter"><p>à</p></div>
@@ -125,9 +125,10 @@
                         <input matInput
                           [matDatepicker]="toDate"
                           placeholder="Data final"
-                          formControlName="toDate">
+                          formControlName="toDate"
+                          (click)="to.open()">
                         <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
-                        <mat-datepicker #toDate></mat-datepicker>
+                        <mat-datepicker #toDate #to></mat-datepicker>
                       </mat-form-field>
                     </div>
                      <button mat-button class="mat-elevation-z0" (click)="applyDateFilter()">Filtrar</button>

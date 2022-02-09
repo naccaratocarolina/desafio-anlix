@@ -47,6 +47,18 @@
                 <h2>Características filtradas por</h2>
               </div>
 
+              <!--Type Filter-->
+              <h4>Indice:</h4>
+              <div class="type-filter">
+                <mat-checkbox [ngModelOptions]="{ standalone: true }" [(ngModel)]="indCardToggle" (change)="applyTypeFilter('type', indCardToggle ? 'ind_card': '')">
+                  Indice Cardíaco
+                </mat-checkbox>
+
+                <mat-checkbox [ngModelOptions]="{ standalone: true }" [(ngModel)]="indPulmToggle" (change)="applyTypeFilter('type', indPulmToggle ? 'ind_pulm': '')">
+                  Indice Pulmonar
+                </mat-checkbox>
+              </div>
+
               <!--Date Filter-->
               <h4>Data:</h4>
               <div class="date-filter-container">
@@ -60,7 +72,7 @@
                     <mat-datepicker #fromDate></mat-datepicker>
                   </mat-form-field>
                 </div>
-                 <button mat-button class="mat-elevation-z0" (click)="applyFilter()">Filtrar</button>
+                 <button mat-button class="mat-elevation-z0" (click)="applyDateFilter()">Filtrar</button>
                  <button mat-button class="mat-elevation-z0" (click)="resetFilters()">Limpar</button>
               </div>
             </form>

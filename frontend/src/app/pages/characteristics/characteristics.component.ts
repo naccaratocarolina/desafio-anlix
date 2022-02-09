@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CharacteristicService } from 'src/app/services/characteristic/characteristic.service';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DatePipe } from '@angular/common';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -18,6 +19,13 @@ export class CharacteristicsComponent implements OnInit {
   /* Table */
   displayedColumns: string[] = ['id', 'type', 'epoch', 'time', 'index'];
   dataSource: MatTableDataSource<any>;
+
+  /* Type Filter */
+  filterValues: any = {};
+  indCardToggle: boolean;
+  indPulmToggle: boolean;
+
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   /* Date Filter */
   pipe: DatePipe;
@@ -47,12 +55,14 @@ export class CharacteristicsComponent implements OnInit {
         this.characteristicService.characteristics = response.characteristics;
         console.log(this.characteristicService.characteristics);
 
-        /* Initialize table data and paginator from characteristics service object */
+        /* Initialize table data, paginator and sort from characteristics object */
         this.dataSource = new MatTableDataSource(this.characteristicService.characteristics);
         this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
 
-        /* Create date filter */
+        /* Create type and date filter */
         this.dataSource.filterPredicate = (data, filter) => {
+          /* Date Filter */
           if (this.fromDate) {
             const timestamp: number = parseInt(data.epoch);
             const epochDate = new Date(timestamp * 1000);
@@ -61,6 +71,15 @@ export class CharacteristicsComponent implements OnInit {
                   (this.fromDate.getMonth() === epochDate.getMonth()) &&
                   (this.fromDate.getFullYear() === epochDate.getFullYear()) ;
           }
+
+          /* Type Filter */
+          if (this.indCardToggle || this.indPulmToggle) {
+            const filterValues = JSON.parse(filter);
+
+            return (this.indCardToggle ? data.type.trim().toLowerCase() === filterValues.type : true) &&
+            (this.indPulmToggle ? data.type.trim().toLowerCase().indexOf(filterValues.type) !== -1 : true);
+          }
+
           return true;
         }
       },
@@ -104,8 +123,19 @@ export class CharacteristicsComponent implements OnInit {
     return type === "ind_card"? "Índice Cardíaco" : "Índice Pulmonar";
   }
 
+  /* Apply type filter */
+  public applyTypeFilter (column: string, filterValue: string) {
+    this.filterValues[column] = filterValue;
+
+    this.dataSource.filter = JSON.stringify(this.filterValues);
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
   /* Apply date filter */
-  public applyFilter () {
+  public applyDateFilter () {
     this.dataSource.filter = '' + Math.random();
   }
 

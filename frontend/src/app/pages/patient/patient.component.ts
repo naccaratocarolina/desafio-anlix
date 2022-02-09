@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { PatientService } from 'src/app/services/patient/patient.service';
 import { CharacteristicService } from 'src/app/services/characteristic/characteristic.service';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DatePipe } from '@angular/common';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -56,6 +57,13 @@ export class PatientComponent implements OnInit {
   /* Toggle Button */
   typeEnum = TypeEnum;
   selectedState = TypeEnum.ind_card;
+
+  /* Type Filter */
+  filterValues: any = {};
+  indCardToggle: boolean;
+  indPulmToggle: boolean;
+
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   /* Date Filter */
   pipe: DatePipe;
@@ -187,9 +195,10 @@ export class PatientComponent implements OnInit {
         this.characteristics = this.ind_card.concat(this.ind_pulm);
         console.log(this.characteristics);
 
-        /* Initialize table data and paginator from characteristics object */
+        /* Initialize table data, paginator and sort from characteristics object */
         this.dataSource = new MatTableDataSource(this.characteristics);
         this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
 
         /* Create filter by date range */
         this.dataSource.filterPredicate = (data, filter) => {
@@ -199,8 +208,16 @@ export class PatientComponent implements OnInit {
 
             return date >= this.fromDate && date <= this.toDate;
           }
+
+          else {
+            const filterValues = JSON.parse(filter);
+
+            return (this.indCardToggle ? data.type.trim().toLowerCase() === filterValues.type : true) &&
+            (this.indPulmToggle ? data.type.trim().toLowerCase().indexOf(filterValues.type) !== -1 : true);
+          }
           return true;
         }
+
       },
       error: (errorResponse) => {
         console.log(errorResponse);
@@ -268,8 +285,19 @@ export class PatientComponent implements OnInit {
   }
 
   /* Apply date filter */
-  public applyFilter () {
+  public applyDateFilter () {
     this.dataSource.filter = '' + Math.random();
+  }
+
+  /* Apply type filter */
+  public applyTypeFilter (column: string, filterValue: string) {
+    this.filterValues[column] = filterValue;
+
+    this.dataSource.filter = JSON.stringify(this.filterValues);
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   /* Clear date filter */

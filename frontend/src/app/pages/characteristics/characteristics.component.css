@@ -157,3 +157,13 @@
   overflow: visible;
   text-align: center;
 }
+
+.mat-checkbox {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-right: 1rem;
+}
+
+::ng-deep .mat-checkbox-frame {
+    border-color: #989FB8 !important;
+}

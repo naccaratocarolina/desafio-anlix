@@ -93,6 +93,18 @@
                     <h2>Características filtradas por</h2>
                   </div>
 
+                  <!--Type Filter-->
+                  <h4>Indice:</h4>
+                  <div class="type-filter">
+                    <mat-checkbox [ngModelOptions]="{ standalone: true }" [(ngModel)]="indCardToggle" (change)="applyTypeFilter('type', indCardToggle ? 'ind_card': '')">
+                      Indice Cardíaco
+                    </mat-checkbox>
+
+                    <mat-checkbox [ngModelOptions]="{ standalone: true }" [(ngModel)]="indPulmToggle" (change)="applyTypeFilter('type', indPulmToggle ? 'ind_pulm': '')">
+                      Indice Pulmonar
+                    </mat-checkbox>
+                  </div>
+
                   <!--Date Filter-->
                   <h4>Período:</h4>
                   <div class="date-filter-container">
@@ -118,7 +130,7 @@
                         <mat-datepicker #toDate></mat-datepicker>
                       </mat-form-field>
                     </div>
-                     <button mat-button class="mat-elevation-z0" (click)="applyFilter()">Filtrar</button>
+                     <button mat-button class="mat-elevation-z0" (click)="applyDateFilter()">Filtrar</button>
                      <button mat-button class="mat-elevation-z0" (click)="resetFilters()">Limpar</button>
                   </div>
                 </form>
@@ -241,6 +253,7 @@
           <h1>Últimos registros</h1>
         </div>
 
+        <!--Characteristic cards-->
         <mat-card class="mat-elevation-z0" *ngFor="let characteristic of lastCharacteristics">
           <mat-card-header>
             <!--ind_card-->
@@ -260,8 +273,6 @@
             Índice: {{ formatIndex(characteristic.index) }}
           </mat-card-content>
         </mat-card>
-
-        <!--Characteristic cards-->
       </div>
     </div>
   </body>

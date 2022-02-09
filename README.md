@@ -27,7 +27,7 @@ Outras tecnologias interessantes que foram implementadas:
 - **ORM:** Sequelize
 
 ## Requisitos
-Para ser possível rodar o projeto, é necessario instalar o gerenciados de pacotes **npm**, o nodejs e o angular cli. Seguem os comandos.
+Para ser possível rodar o projeto, é necessario instalar o gerenciador de pacotes **npm**, o **nodejs** e o **angular cli**. Seguem os comandos.
 
 ``` bash
 $ sudo pacman -S nodejs-lts-fermium npm

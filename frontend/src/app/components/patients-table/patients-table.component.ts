@@ -15,7 +15,7 @@ export class PatientsTableComponent implements OnInit {
   patient: any;
 
   /* Table */
-  displayedColumns: string[] = ['id', 'date_of_birth', 'name', 'age', 'gender', 'color', 'blood_type', 'patient-page'];
+  displayedColumns: string[] = ['id', 'date_of_birth', 'name', 'age', 'cpf', 'gender', 'color', 'blood_type', 'patient-page'];
   dataSource: MatTableDataSource<any>;
 
   /* Name Filter */
@@ -80,12 +80,8 @@ export class PatientsTableComponent implements OnInit {
 
   /* Format date of birth (dd/mm/aaaa) */
   public formatDateOfBirth (date_of_birth: Date) {
-    const date = new Date(date_of_birth);
+    const date = (date_of_birth.toString()).split("-");
 
-    const day = (date.getDate() + 1) < 9 ? '0' + date.getDate() : (date.getDate() + 1);
-    const month = (date.getMonth() + 1) < 9 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
-    const year = date.getFullYear();;
-
-    return day + '/' + month + '/' + year;
+    return date[2] + '/' + date[1] + '/' + date[0];
   }
 }

@@ -218,7 +218,7 @@ export class PatientComponent implements OnInit {
             return (this.indCardToggle ? data.type.trim().toLowerCase() === filterValues.type : true) &&
             (this.indPulmToggle ? data.type.trim().toLowerCase() === filterValues.type : true);
           }
-          
+
           return true;
         }
 
@@ -248,8 +248,8 @@ export class PatientComponent implements OnInit {
     const timestamp: number = parseInt(epoch);
     const date = new Date(timestamp * 1000);
 
-    const day = date.getDate() < 9 ? '0' + date.getDate() : date.getDate();
-    const month = (date.getMonth() + 1) < 9 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
+    const day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+    const month = (date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
     const year = date.getFullYear();;
 
     return day + '/' + month + '/' + year;
@@ -260,22 +260,18 @@ export class PatientComponent implements OnInit {
     const timestamp: number = parseInt(epoch);
     const date = new Date(timestamp * 1000);
 
-    const hours = date.getHours() < 9 ? '0' + date.getHours() : date.getHours();
-    const minutes = date.getMinutes() < 9 ? '0' + date.getMinutes() : date.getMinutes();
-    const seconds = date.getSeconds() < 9 ? '0' + date.getSeconds() : date.getSeconds();
+    const hours = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
+    const minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+    const seconds = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
 
     return hours + ':' + minutes + ':' + seconds;
   }
 
   /* Format date of birth (dd/mm/aaaa) */
   public formatDateOfBirth (date_of_birth: Date) {
-    const date = new Date(date_of_birth);
+    const date = (date_of_birth.toString()).split("-");
 
-    const day = (date.getDate() + 1) < 9 ? '0' + date.getDate() : (date.getDate() + 1);
-    const month = (date.getMonth() + 1) < 9 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
-    const year = date.getFullYear();
-
-    return day + '/' + month + '/' + year;
+    return date[2] + '/' + date[1] + '/' + date[0];
   }
 
   /* Format index (round float number to 2 decimal cases) */

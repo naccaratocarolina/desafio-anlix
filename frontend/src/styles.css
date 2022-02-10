@@ -1,8 +1,6 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global Settings */
 html, body {
   height: 100%;
   background-color: #F0F6FB;
   font-family: 'Roboto Condensed', sans-serif;
 }
-
-@import '~material-design-icons/iconfont/material-icons.css';

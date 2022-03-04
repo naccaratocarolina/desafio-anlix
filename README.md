@@ -30,7 +30,7 @@ Outras tecnologias interessantes que foram implementadas:
 Para ser possível rodar o projeto, é necessario instalar o gerenciador de pacotes **npm**, o **nodejs** e o **angular cli**. Seguem os comandos.
 
 ``` bash
-$ sudo pacman -S nodejs-lts-fermium npm
+$ sudo pacman -S nodejs npm
 ```
 :warning: O comando acima se refere à instalação em distros baseadas em Arch Linux.
 
